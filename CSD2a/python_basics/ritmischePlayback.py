@@ -5,29 +5,24 @@ pygame.init()
 
 Hihat = pygame.mixer.Sound('Hihat.wav')
 
-# BPM
+# Show BPM and ask user to change
 initBPM = 120
 BPM = None
-print(type(BPM))
 print("BPM: ", initBPM)
-if input("Do you want to change the BPM (y/n)? \n ") == 'yes':
-    while type(BPM) != int:
+if input("Do you want to change the BPM (y/n)? \n ") == 'y':
+    while type(BPM) != float:
         try: 
-            BPM = int(input("New BPM: "))
+            BPM = float(input("New BPM: "))
         except ValueError:
             print('Invalid integer value')
 else: BPM = initBPM
 
 
-# numPlaybackTimes = int(input("How many notes: "))
-
-
-bpmToSeconds = 60/BPM
-
 #Asks user to create list, removes all comma's and converts the strings to floats
-
 timestamps16th = (input("List of 16th note timestamps: "))
 timestamps16th = list(timestamps16th.split(","))
+
+bpmToSeconds = 60/BPM
 
 for i in timestamps16th:
     timestamps16th.append(float(timestamps16th[0]) * bpmToSeconds) #conversion from notes to seconds 
