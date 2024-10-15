@@ -18,27 +18,43 @@ if input("Do you want to change the BPM (y/n)? \n ") == 'y':
 else: BPM = initBPM
 
 
-#Asks user to create list, removes all comma's and converts the strings to floats
-timestamps16th = (input("List of 16th note timestamps: "))
-timestamps16th = list(timestamps16th.split(","))
+# #Asks user to create list, removes all comma's and converts the strings to floats
+# timestamps16th = (input("List of 16th note timestamps: "))
+# timestamps16th = list(timestamps16th.split(","))
 
-bpmToSeconds = 60/BPM
+# bpmToSeconds = 60/BPM
 
-for i in timestamps16th:
-    timestamps16th.append(float(timestamps16th[0]) * bpmToSeconds) #conversion from notes to seconds 
-    timestamps16th.remove(timestamps16th[0])  
+# for i in timestamps16th:
+#     timestamps16th.append(float(timestamps16th[0]) * bpmToSeconds) #conversion from notes to seconds 
+#     timestamps16th.remove(timestamps16th[0])  
+
+
+
+
+x = 1
+TIMESTAMP = []
+
+for i in range (5):
+    print(x)
+    TIMESTAMP.append(x)
+    x = x+ (1/5*x)
+
+
     
 
-#Function to create time stamps
-timestampList = []
+# # Function to create time stamps
+# timestampList = []
 
-def durationToTimestamps16th(list):
-    sum = 0
-    for time_dur in timestamps16th:
-        timestampList.append(sum)
-        sum = sum + time_dur
 
-durationToTimestamps16th(timestamps16th)
+# def durationToTimestamps16th(list):
+#     sum = 0
+#     for time_dur in list:
+#         timestampList.append(sum)
+#         sum = sum + time_dur
+
+# durationToTimestamps16th(timestamps16th)
+
+timestampList = TIMESTAMP
 
 print(timestampList)
 
