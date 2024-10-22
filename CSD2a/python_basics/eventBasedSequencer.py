@@ -53,9 +53,10 @@ initBPM = 120
 BPM = None
 print("\nBPM: ", initBPM)
 if input("Do you want to change the BPM (y/n)?\n") == 'y':
-    while type(BPM) != float:
+    print("New BPM (between 30 and 350):")
+    while BPM == None or BPM < 30 or BPM > 350:
         try: 
-            BPM = float(input("New BPM: "))
+            BPM = float(input(""))
         except ValueError:
             print(f"{bcolors.WARNING}Invalid value, try again:{bcolors.ENDC}")
 else: BPM = initBPM
@@ -98,7 +99,7 @@ tryGrowthfactorInput(growthfactorKick, float, "    Kick growthfactor: ")
 
 # ---Repeats---
 numberOfRepeats = None
-print("\nHow many times do you want to repeat this rhythm:  ")
+print("\nHow many times do you want to repeat this rhythm (max 10):  ")
 
 while numberOfRepeats == None or numberOfRepeats < 0 or numberOfRepeats >= 10:
     try: numberOfRepeats = int(input())
