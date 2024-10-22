@@ -6,10 +6,29 @@ import os
 
 pygame.init()
 
+# Colours (code from https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal)
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+
 # Samples
 hihat = pygame.mixer.Sound("Hihat.wav")
 snare = pygame.mixer.Sound("Snare.wav")
 kick = pygame.mixer.Sound("Kick.wav")
+
+# Number sequences:
+fib = [2, 3, 5, 8, 13, 21]
+pwrOf2 = [1, 2, 4, 8, 16, 32]
+linear = [1, 2, 3, 4, 5, 6, 7]
+
 
 
 # Function to generate event dictionaries 
@@ -32,22 +51,77 @@ kickEvent = generateEvent(kick, "Kick")
 # Show BPM and ask user to change  (begin met alle settings vragen--> user input )
 initBPM = 120
 BPM = None
-print("BPM: ", initBPM)
-if input("Do you want to change the BPM (y/n)? \n ") == 'y':
+print("\nBPM: ", initBPM)
+if input("Do you want to change the BPM (y/n)?\n") == 'y':
     while type(BPM) != float:
         try: 
             BPM = float(input("New BPM: "))
         except ValueError:
-            print('Invalid integer value')
+            print(f"{bcolors.WARNING}Invalid value, try again:{bcolors.ENDC}")
 else: BPM = initBPM
 
-# Ask for growthFactor and numNotes and random or not + number of repeats
- 
-numberOfRepeats = int(input("How many times do you want to repeat this rhythm: "))
+
+
+# User input 
+# Note: probably duplicates
+
+# ---Sequence---
+chosenSeq = None
+print("\nWhich sequence do you want to use? (1,2,3): \n 1. Fibonacci sequence \n 2. Power of two sequence \n 3. Normal sequence")
+
+while chosenSeq != 1 and chosenSeq != 2 and chosenSeq != 3:
+    try: chosenSeq = int(input(""))
+    except ValueError:
+        print(f"{bcolors.WARNING}Invalid value, try again:{bcolors.ENDC}")
+
+
+# ---Growthfactors---
+def tryGrowthfactorInput(variable, type, string):
+    print(string)
+    while variable == None or variable < 0.6 or variable > 1.6:
+        try: variable = type(input("        "))
+        except ValueError:
+            print(f"{bcolors.WARNING}Invalid value, try again:{bcolors.ENDC}")
+
+    return variable
+
+
+growthfactorHihat = None
+growthfactorSnare = None
+growthfactorKick = None
+
+print("\nChose growthfactors (from 0.6 to 1.6)")
+tryGrowthfactorInput(growthfactorHihat, float, "    Hihat growthfactor: ")
+tryGrowthfactorInput(growthfactorSnare, float, "    Snare growthfactor: ")
+tryGrowthfactorInput(growthfactorKick, float, "    Kick growthfactor: ")
+
+
+# ---Repeats---
+numberOfRepeats = None
+print("\nHow many times do you want to repeat this rhythm:  ")
+
+while numberOfRepeats == None or numberOfRepeats < 0 or numberOfRepeats >= 10:
+    try: numberOfRepeats = int(input())
+    except ValueError:
+        print(f"{bcolors.WARNING}Invalid value, try again:{bcolors.ENDC}")
+
+
+
+# Picking random numbers from a list
+if(chosenSeq == 1):
+    chosenSeq = fib
+elif(chosenSeq == 2):
+    chosenSeq = pwrOf2
+else: chosenSeq = linear
+
+numOfHihats = (random.choice(chosenSeq[3:6]))
+numOfSnares = (random.choice(chosenSeq[1:4]))
+numOfKicks = (random.choice(chosenSeq[0:3]))
+
 
 
 # Function to generate timestamps based on growth factor
-# uitleg waarom lelijk
+# This function decides between two algorithms: one for growthFactor > 1, one for growthFactor < 1
 def generateTimestamps(numNotes, growthFactor):
 
     barLength = 240/BPM
@@ -61,12 +135,9 @@ def generateTimestamps(numNotes, growthFactor):
         
         initLength = barLength/(sum(growthFactorList))
 
-    elif (growthFactor > 0.6 and growthFactor < 1):
+    else:
         initLength = 1
         extraNote = 1
-     
-    else:
-        print("nope nieuwe growthFactor")  #aan het begin van de code zetten
 
     
 
@@ -81,10 +152,11 @@ def generateTimestamps(numNotes, growthFactor):
         timestamps.append(summ)
         summ = summ + durations[i]
 
-    # print(durations)
 
-    if(growthFactor >=  0.6 and growthFactor < 1):
-
+    if(growthFactor > 1):
+        return [timestamps, durations]
+    
+    else:
         initLenFactor = barLength/timestamps.pop(numNotes)
 
         timestampsNew = []
@@ -93,12 +165,11 @@ def generateTimestamps(numNotes, growthFactor):
         for timestamps in timestamps:
             timestampsNew.append(timestamps*initLenFactor)
         
-        # Note to self: the durations also have to be scaled, this is probably not the most efficient way to do it 
+        # Note to self: the durations have to be scaled, but this is probably not the most efficient way to do it 
         for durations in durations:
             durationsNew.append(durations*initLenFactor)
 
         return [timestampsNew, durationsNew]
-    else: return [timestamps, durations]
 
 
 
@@ -119,9 +190,9 @@ hihatEventList = []
 snareEventList = []
 kickEventList = []
 
-pushTimestampsToDictionary(hihatEvent, generateTimestamps(21, 0.9), hihatEventList)
-pushTimestampsToDictionary(snareEvent, generateTimestamps(8, 0.8), snareEventList)
-pushTimestampsToDictionary(kickEvent, generateTimestamps(5, 0.61), kickEventList)
+pushTimestampsToDictionary(hihatEvent, generateTimestamps(numOfHihats, 0.9), hihatEventList)
+pushTimestampsToDictionary(snareEvent, generateTimestamps(numOfSnares, 0.8), snareEventList)
+pushTimestampsToDictionary(kickEvent, generateTimestamps(numOfKicks, 0.61), kickEventList)
 
 
 eventList = hihatEventList + snareEventList + kickEventList
@@ -149,7 +220,6 @@ def eventHandler(event):
 # While loop to play the samples
 def playSound():
     eventList = storedEventList.copy()
-    # print(storedEventList)
     timeZero = time.time() # Store current time
     ts = eventList[0]["timestamp"]
 
@@ -159,13 +229,8 @@ def playSound():
         # check if we passed the next timestamp,
         # if so, play sample and fetch new timestamp
         if secondsPlaying >= ts:
-            print(ts)
             eventList[0]["sample"].play()
 
-            simultaneousEvents = []
-
-            while eventList and eventList[0] == ts:
-                simultaneousEvents.append(eventList.pop(0))
             if len(eventList) > 1:
                 ts = eventList.pop(0)
                 ts = eventList[0]["timestamp"] 
@@ -185,8 +250,7 @@ for i in range(numberOfRepeats):
 
 
 # Store as a Midi file
-if (input("Do you want to save this beat as a MIDI file? (y/n): ")) == "y":
-    userFileName = input("File name: ")
+if (input("\nDo you want to save this beat as a MIDI file? (y/n):\n")) == "y":
 
     track = 0
     channel = 9
@@ -212,50 +276,16 @@ if (input("Do you want to save this beat as a MIDI file? (y/n): ")) == "y":
         mf.addNote(track, channel, instr_midi_pitch[instr_name], qnote_time,
             event["duration"], event["velocity"])
 
-    with open(os.path.expanduser("~") + fr"\Downloads\{userFileName}.midi","wb") as outf: #this only works for windows because of the backslashes
-        mf.writeFile(outf)
+    # Writes the file to the downloads folder(with exception handler)
+    userFileName = None
+    while userFileName != "MIDI":
+        try: 
+            userFileName = input("\nFile name: ")
 
-    print("File is stored in downloads")
+            with open(os.path.expanduser("~") + fr"\Downloads\{userFileName}.midi","wb") as outf: #this only works for windows because of the backslashes
+                mf.writeFile(outf)
 
+        except OSError: 
+            print(f"{bcolors.WARNING}Invalid name, try again:{bcolors.ENDC}")
 
-# # Clear storedEventList after asking for it to be saved
-# storedEventList.clear()
-
-# # Clearing lists that need to be cleared
-
-# snareEventList.clear()
-# kickEventList.clear()
-# hihatEventList.clear()
-
-# eventList.clear()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# # Function to generate timestamps based on growth factor
-# def generateTimestamps(numNotes, growthFactor, startDuration):
-#     timestamps = []
-#     currentTime = 0
-
-#     for i in range(numNotes):
-#         timestamps.append(currentTime)
-#         currentTime += startDuration
-#         startDuration *= growthFactor
-    
-#     return timestamps
-
+    print(f"{bcolors.OKGREEN}\nFile is stored in downloads{bcolors.ENDC}")
