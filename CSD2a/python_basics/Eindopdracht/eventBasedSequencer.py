@@ -6,6 +6,9 @@ import os
 
 pygame.init()
 
+#List with variations of 'Yes'
+yesList = ["y", "Y", "yes", "Yes", "YES", "1", "Yeah", "Yea", "YEAH", "YEA", "Ye", "YE"]
+
 # Colours (code from https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal)
 class bcolors:
     HEADER = '\033[95m'
@@ -52,7 +55,7 @@ kickEvent = generateEvent(kick, "Kick")
 initBPM = 120
 BPM = None
 print("\nBPM: ", initBPM)
-if input("Do you want to change the BPM (y/n)?\n") == 'y':
+if input("Do you want to change the BPM (y/n)?\n") in yesList:
     print("New BPM (between 30 and 350):")
     while BPM == None or BPM < 30 or BPM > 350:
         try: 
@@ -245,13 +248,16 @@ def playSound():
 
 
 
-# For loop to play the sequence multiple times
-for i in range(numberOfRepeats):
-    playSound()
+# For loop to play the sequence multiple times + while loop to ask for repeats
 
+repeat = 'y'
+while repeat in yesList :
+    for i in range(numberOfRepeats):
+        playSound()
+    repeat = (input("\nDo you want to repeat this sequence? (y/n)\n"))
 
 # Store as a Midi file
-if (input("\nDo you want to save this beat as a MIDI file? (y/n):\n")) == "y":
+if (input("\nDo you want to save this beat as a MIDI file? (y/n):\n")) in yesList:
 
     track = 0
     channel = 9
