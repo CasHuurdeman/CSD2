@@ -33,7 +33,6 @@ Note::Note(){
 
 int Note::getVelocity() {
     return velocity;
-    std::cout << velocity;
 }
 
 int main() {
