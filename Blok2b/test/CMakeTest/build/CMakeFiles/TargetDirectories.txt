@@ -1,0 +1,3 @@
+C:/Users/cashu/Documents/HKU/Jaar2/CSD2/Blok2b/test/CMakeTest/build/CMakeFiles/Hi.dir
+C:/Users/cashu/Documents/HKU/Jaar2/CSD2/Blok2b/test/CMakeTest/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/cashu/Documents/HKU/Jaar2/CSD2/Blok2b/test/CMakeTest/build/CMakeFiles/ZERO_CHECK.dir
