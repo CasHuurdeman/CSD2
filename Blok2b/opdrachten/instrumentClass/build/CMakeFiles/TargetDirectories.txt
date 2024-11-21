@@ -1,0 +1,3 @@
+C:/Users/cashu/Documents/HKU/Jaar2/CSD2/Blok2b/opdrachten/instrumentClass/build/CMakeFiles/instrumentClass.dir
+C:/Users/cashu/Documents/HKU/Jaar2/CSD2/Blok2b/opdrachten/instrumentClass/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/cashu/Documents/HKU/Jaar2/CSD2/Blok2b/opdrachten/instrumentClass/build/CMakeFiles/ZERO_CHECK.dir

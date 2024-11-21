@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\cashu\Documents\HKU\Jaar2\CSD2\Blok2b\test\classInClass\build\CMakeFiles\bc25769ac29109121b75c8b16b0a342e\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{550BA64A-B88B-3B22-A9A1-75E5F272366C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
