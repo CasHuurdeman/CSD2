@@ -1,0 +1,3 @@
+C:/Users/cashu/Documents/HKU/Jaar2/CSD2/Blok2b/test/simpleInheritance/build/CMakeFiles/simpleInheritance.dir
+C:/Users/cashu/Documents/HKU/Jaar2/CSD2/Blok2b/test/simpleInheritance/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/cashu/Documents/HKU/Jaar2/CSD2/Blok2b/test/simpleInheritance/build/CMakeFiles/ZERO_CHECK.dir

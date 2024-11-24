@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\cashu\Documents\HKU\Jaar2\CSD2\Blok2b\test\simpleInheritance\cat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\cashu\Documents\HKU\Jaar2\CSD2\Blok2b\test\simpleInheritance\dog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\cashu\Documents\HKU\Jaar2\CSD2\Blok2b\test\simpleInheritance\pet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\cashu\Documents\HKU\Jaar2\CSD2\Blok2b\test\simpleInheritance\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\cashu\Documents\HKU\Jaar2\CSD2\Blok2b\test\simpleInheritance\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{17F6A59B-A4F2-3161-A60D-E73536FE76CB}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
