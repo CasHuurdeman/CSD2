@@ -4,6 +4,6 @@
 class Speaker{
 public:
     Speaker();
-    Tweeter aTweeter;
+    Tweeter aTweeter{2.7f};
     Woofer aWoofer;
 };

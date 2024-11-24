@@ -1,0 +1,3 @@
+C:/Users/cashu/Documents/HKU/Jaar2/CSD2/Blok2b/test/oscillator/build/CMakeFiles/Oscillator.dir
+C:/Users/cashu/Documents/HKU/Jaar2/CSD2/Blok2b/test/oscillator/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/cashu/Documents/HKU/Jaar2/CSD2/Blok2b/test/oscillator/build/CMakeFiles/ZERO_CHECK.dir

@@ -1,0 +1,10 @@
+^C:\USERS\CASHU\DOCUMENTS\HKU\JAAR2\CSD2\BLOK2B\TEST\OSCILLATOR\BUILD\CMAKEFILES\44076AA611EF4836EE69389421779F5B\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/cashu/Documents/HKU/Jaar2/CSD2/Blok2b/test/oscillator -BC:/Users/cashu/Documents/HKU/Jaar2/CSD2/Blok2b/test/oscillator/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/cashu/Documents/HKU/Jaar2/CSD2/Blok2b/test/oscillator/build/oscillator.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

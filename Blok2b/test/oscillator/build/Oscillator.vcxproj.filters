@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\cashu\Documents\HKU\Jaar2\CSD2\Blok2b\test\oscillator\oscillator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\cashu\Documents\HKU\Jaar2\CSD2\Blok2b\test\oscillator\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\cashu\Documents\HKU\Jaar2\CSD2\Blok2b\test\oscillator\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{A490942E-6DCF-376C-A115-4D0AFC3067E4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -4,19 +4,18 @@
 
 
 
-Tweeter::Tweeter(){
+Tweeter::Tweeter() : Tweeter(2.5f){
     std::cout << "Tweeter - constructor\n";
 
-    diameter;
-    conePosition = 0.0f;
 };
 
 
-// Tweeter::Tweeter(float diam){
-//     std::cout << "Tweeter - constructor with float diam parameter\n";
-//     diameter = diam;
-//     conePosition = 0.0f; // f --> float
-// };
+Tweeter::Tweeter(float diam){
+    std::cout << "Tweeter - overloaded constructor\n";
+
+    diameter = diam;
+    conePosition = 0.0f;
+};
 
 
 

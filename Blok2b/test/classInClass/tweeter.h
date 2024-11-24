@@ -1,15 +1,15 @@
 
-class Tweeter{
+#include "driver.h"
+
+class Tweeter: public Driver{
 public:
+ 
     // constructor
     Tweeter();
     //constructor delegation
-    Tweeter(float diameter) : Tweeter(){};
+    Tweeter(float diam);
 
-    
-    // fields
-    float diameter;
-    float conePosition;
 };
 
-//constructor delegation + giving 'arguments' to classes
+//hoe moet ik dit fixen? --> op github een werkende versie
+

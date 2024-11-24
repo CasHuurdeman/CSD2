@@ -1,11 +1,11 @@
-class Woofer{
+#include "driver.h"
+
+class Woofer: public Driver{
 public:
+
     //constructor
     Woofer();
 
     //Method
 
-    //fields
-    float diameter;
-    float conePosition;
 };
