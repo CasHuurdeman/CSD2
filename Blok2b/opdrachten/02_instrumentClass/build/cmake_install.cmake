@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/cashu/Documents/HKU/Jaar2/CSD2/Blok2b/opdrachten/instrumentClass
+# Install script for directory: C:/Users/cashu/Documents/HKU/Jaar2/CSD2/Blok2b/opdrachten/02_instrumentClass
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

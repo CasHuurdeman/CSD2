@@ -3,11 +3,11 @@
 
 int main ()
 {
-  Pet aPet("Peter");
+//  Pet aPet("Peter");
   Cat aCat("Foo");
   Dog aDog("Bar");
 
-  aPet.sleep();
+//  aPet.sleep();
   aCat.sleep();
   aDog.sleep();
 

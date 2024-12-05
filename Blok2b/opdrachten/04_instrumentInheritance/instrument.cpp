@@ -22,7 +22,7 @@ void Instrument::setLowFreq(float f){
 };
 
 void Instrument::play(){
-    std::cout << "Instrument playing" << std::endl;
+    std::cout << "Instrument playing" << std::endl; 
 }
 
 
