@@ -17,7 +17,8 @@ public:
     //return the current sample
     float getSample();
     // go to next sample
-
+    void tick();
+    virtual void calculate() = 0;
     //getters and setters
     void setFrequency(float frequency);
     float getFrequency();
