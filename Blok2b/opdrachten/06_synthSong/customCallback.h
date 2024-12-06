@@ -25,7 +25,6 @@ struct CustomCallback : AudioCallback {
                 // write sample to buffer at channel 0, amp = 0.25
                 outputChannels[channel][sample] = saw.getSample();
                 saw.tick();
-                saw.calculate();
             }
         }
     }

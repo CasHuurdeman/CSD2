@@ -19,6 +19,15 @@ Saw::~Saw() {
 }
 
 void Saw::calculate() {
-    sample =  (2*phase -1) * amplitude; //is dit de mooiste manier?
+    if (sample < 0.25f) {
+        sample = (4*phase) * amplitude;
+    }
+    else if (sample < 0.75f ) {
+        sample = (2 + -4*phase) * amplitude;
+    }
+    else {
+        sample = (-4 + 4*phase) * amplitude;
+    } //triangle??
+    // sample =  (2*phase -1) * amplitude; //is dit de mooiste manier?
 
 }
