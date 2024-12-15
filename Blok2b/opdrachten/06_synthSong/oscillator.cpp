@@ -1,6 +1,7 @@
 //
 // Created by cashu on 05/12/2024.
 #include "oscillator.h"
+
 #include <iostream>
 
 Oscillator::Oscillator()

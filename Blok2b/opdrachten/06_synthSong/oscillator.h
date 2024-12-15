@@ -2,10 +2,13 @@
 // Created by cashu on 05/12/2024.
 //
 
+
 #include "math.h"
 #include <iostream>
+
 #ifndef OSCILLATOR_H
 #define OSCILLATOR_H
+
 
 class Oscillator
 {
@@ -32,5 +35,6 @@ protected:
     float sample = 0.0;
     float samplerate = 44100.0f;
 };
+
 
 #endif //OSCILLATOR_H

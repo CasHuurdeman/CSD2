@@ -10,7 +10,8 @@ class Square : public Oscillator
 {
 public:
     //Constructor and destructor
-    Square(float frequency, float samplerate = 44100);
+    Square();
+    Square(double frequency, double samplerate);
     ~Square();
 
     void calculate();

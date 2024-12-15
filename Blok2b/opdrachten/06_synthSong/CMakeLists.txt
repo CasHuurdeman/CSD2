@@ -1,6 +1,8 @@
 project(synthSong VERSION 0.0.1)
 juce_add_console_app(synthSong PRODUCT_NAME "synthSong")
-target_sources(synthSong PRIVATE main.cpp oscillator.cpp sine.cpp saw.cpp square.cpp)
+target_sources(synthSong PRIVATE main.cpp melody.cpp
+        synth.cpp organSynth.cpp
+        oscillator.cpp sine.cpp saw.cpp square.cpp)
 target_compile_definitions(synthSong PRIVATE JUCE_WEB_BROWSER=0 JUCE_USE_CURL=0)
 
 target_link_libraries(synthSong

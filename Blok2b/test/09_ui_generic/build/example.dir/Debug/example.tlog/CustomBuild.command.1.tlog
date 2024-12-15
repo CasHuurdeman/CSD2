@@ -1,0 +1,10 @@
+^C:\USERS\CASHU\DOCUMENTS\HKU\JAAR2\CODE_CISKA\BLOK2B\SESSION5\02_UI_GENERIC\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/cashu/Documents/HKU/Jaar2/code_Ciska/blok2b/session5/02_ui_generic -BC:/Users/cashu/Documents/HKU/Jaar2/code_Ciska/blok2b/session5/02_ui_generic/build --check-stamp-file C:/Users/cashu/Documents/HKU/Jaar2/code_Ciska/blok2b/session5/02_ui_generic/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
