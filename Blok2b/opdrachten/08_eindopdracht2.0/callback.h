@@ -12,6 +12,7 @@
 class CustomCallback : public AudioCallback {
 public:
   CustomCallback (float sampleRate);
+  ~CustomCallback ();
   void prepare (int rate) override;
   void process (AudioBuffer buffer) override;
 

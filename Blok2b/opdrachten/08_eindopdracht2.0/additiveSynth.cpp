@@ -14,18 +14,19 @@ AdditiveSynth::~AdditiveSynth(){
      std::cout << "AdditiveSynth - destructor" << std::endl;
 }
 
+//Amp is in user settings
 void AdditiveSynth::calculate(){
+    sample = 0;
     for (int i = 0; i < sines.size(); i++) {
-        sample = sines[i].getFrequency();
+        sample += sines[i].getSample() /sines.size();
     }
-    std::cout << sample << std::endl;
 }
 
 void AdditiveSynth::tick() {
     calculate();
     for (int i = 0; i < sines.size(); i++) {
         sines[i].tick();
-    };
+    }
 }
 
 void AdditiveSynth::printArray() {
@@ -37,6 +38,16 @@ void AdditiveSynth::printArray() {
 
 void AdditiveSynth::setFrequency(float frequency) {
     for (int i = 0; i < sines.size(); i++) {
-        sines[i].setFrequency(frequency * i);
+        sines[i].setFrequency(frequency * (i+1));
     };
+    // std::cout << "Sines0: " << sines[0].getFrequency() << std::endl;
+    // std::cout << "Sines1: " << sines[1].getFrequency() << std::endl;
+}
+
+void AdditiveSynth::fillSines() {
+    Sine sine;
+    for (int i = 0; i < numOfHarmonics; i++) {
+        sines.push_back(sine); ;
+        std::cout << i << std::endl;
+    }
 }

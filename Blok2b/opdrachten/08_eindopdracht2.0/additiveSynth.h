@@ -4,7 +4,7 @@
 #include "oscillator.h"
 #include "synth.h"
 #include "sine.h"
-#include <array>
+#include <vector>
 
 
 #ifndef ADDITIVESYNTH_H
@@ -20,11 +20,14 @@ public:
 
 
     void printArray();
+    int numOfHarmonics = 50;
 
 protected:
     void  calculate();
 
-    std::array <Sine, 2> sines;
+    void fillSines();
+
+    std::vector <Sine> sines;
 };
 
 #endif //ADDITIVESYNTH_H

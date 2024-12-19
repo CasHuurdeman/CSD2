@@ -8,11 +8,17 @@ CustomCallback::CustomCallback(float sampleRate)
     std::cout << "Hallo Ciska" << std::endl;
 }
 
+CustomCallback::~CustomCallback() {
+    delete synth;
+    synth = nullptr;
+}
+
 void CustomCallback::prepare(int sampleRate) {
     this->sampleRate = sampleRate;
     std::cout << "\nsampleRate: " << sampleRate << "\n";
 
     synth = new AdditiveSynth();
+    synth->fillSines();
 
     synth->updatePitch(melody, *synth);
 }
@@ -44,4 +50,3 @@ void CustomCallback::process(AudioBuffer buffer) {
         }
     }
 }
-

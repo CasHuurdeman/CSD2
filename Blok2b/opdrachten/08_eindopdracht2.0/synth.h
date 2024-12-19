@@ -28,7 +28,7 @@ public:
     float sample;
     float amplitude;
     int midiNote;
-
+    virtual void fillSines() = 0;
 };
 
 #endif //SYNTH_H
