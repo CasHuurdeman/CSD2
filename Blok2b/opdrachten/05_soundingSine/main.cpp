@@ -7,6 +7,7 @@ int main() {
     JUCEModule juceModule (audioSource);
     juceModule.init(1,1);
 
+    std::cout << "HI" << std::endl;
     std::cout << "Press q + Enter to quit..." << std::endl;
     bool running = true;
     while (running) {

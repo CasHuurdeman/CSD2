@@ -1,3 +1,4 @@
 add_subdirectory(05_soundingSine)
 add_subdirectory(06_synthSong)
-add_subdirectory(07_eindopdracht)
+add_subdirectory(07_eindopdracht_1.1)
+add_subdirectory(08_eindopdracht2.0)

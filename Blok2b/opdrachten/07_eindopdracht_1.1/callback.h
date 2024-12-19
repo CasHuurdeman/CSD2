@@ -3,9 +3,10 @@
 
 #include "audiocomponent.h"
 #include "oscillator.h"
-#include "sine.h"
+// #include "sine.h"
 #include "square.h"
 #include "melody.h"
+#include "organSynth.h"
 
 class CustomCallback : public AudioCallback {
 public:
@@ -14,11 +15,11 @@ public:
   void process (AudioBuffer buffer) override;
 
   float mtof(float mPitch);
-  void updatePitch(Melody& melody, Square& square);
+  void updatePitch(Melody& melody, OrganSynth& organSynth);
 
 private:
   float sampleRate;
-  Square square;
+  OrganSynth organSynth;
   float amplitude = 0.25;
   Melody melody;
   int frameIndex = 0;
@@ -29,6 +30,7 @@ private:
    * A note of say 500 msec or 0.5 sec, takes 0.5*samplerate samples to be played
    */
   float noteDelayFactor = 0.1;
+
 };
 
 #endif  //CALLBACK_H
