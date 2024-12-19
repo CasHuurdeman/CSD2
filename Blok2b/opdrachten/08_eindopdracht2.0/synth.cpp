@@ -23,5 +23,5 @@ float Synth::mtof(float midiPitch){
 void Synth::updatePitch(Melody& melody, Synth& synth) {
     float note = melody.getNote();
     float freq = mtof (note);
-    doTheThing(freq);
+    setFrequency(freq);
 }

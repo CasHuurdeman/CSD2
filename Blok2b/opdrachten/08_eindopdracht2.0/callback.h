@@ -3,10 +3,11 @@
 
 #include "audiocomponent.h"
 #include "oscillator.h"
-// #include "sine.h"
-#include "square.h"
+//#include "sine.h"
+//#include "square.h"
 #include "melody.h"
 #include "organSynth.h"
+#include "additiveSynth.h"
 
 class CustomCallback : public AudioCallback {
 public:
@@ -14,12 +15,14 @@ public:
   void prepare (int rate) override;
   void process (AudioBuffer buffer) override;
 
-  float mtof(float mPitch);
-  void updatePitch(Melody& melody, OrganSynth& organSynth);
 
 private:
   float sampleRate;
-  OrganSynth organSynth;
+
+//  OrganSynth organSynth;
+//  AdditiveSynth additiveSynth;
+  Synth* synth;
+
   float amplitude = 0.25;
   Melody melody;
   int frameIndex = 0;

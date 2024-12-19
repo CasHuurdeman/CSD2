@@ -2,22 +2,21 @@
 #include "callback.h"
 #include <iostream>
 #include <thread>
+#include "additiveSynth.h"
 
-
-#define WRITE_TO_FILE 0
 
 
 int main (int argc, char** argv) {
+  std::cout << "UI..." << std::endl;
+  AdditiveSynth additiveSynth;
+  additiveSynth.printArray();
+
   ScopedMessageThreadEnabler scopedMessageThreadEnabler;
   CustomCallback audioSource (44100);
 
-#if WRITE_TO_FILE
-  AudioToFile audioToFile;
-  audioToFile.write (audioSource);
-#else
 
   JUCEModule juceModule (audioSource);
-  juceModule.init (1, 1);
+  juceModule.init (2, 2);
   std::cout << "Hello" << std::endl;
 
   std::cout << "Press q + Enter to quit..." << std::endl;
@@ -28,7 +27,6 @@ int main (int argc, char** argv) {
         running = false;
     }
   }
-#endif
   //end the program
   return 0;
 }  // main()

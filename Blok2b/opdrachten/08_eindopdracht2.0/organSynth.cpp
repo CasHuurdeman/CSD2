@@ -23,3 +23,8 @@ void OrganSynth::tick() {
     square1.tick();
     square2.tick();
 }
+
+void OrganSynth::setFrequency(float freq) {
+    square1.setFrequency (freq);
+    square2.setFrequency (freq*1.51f);
+}

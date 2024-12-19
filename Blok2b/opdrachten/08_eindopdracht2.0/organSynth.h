@@ -3,6 +3,8 @@
 //
 #include "synth.h"
 #include "melody.h"
+#include "square.h"
+#include <array>
 
 #ifndef ORGANSYNTH_H
 #define ORGANSYNTH_H
@@ -16,13 +18,11 @@ public:
 
   void tick() override;
 
-  void doTheThing(float freq) override{
-    square1.setFrequency (freq);
-    square2.setFrequency (freq*1.51f);
-  }
+  void setFrequency(float freq) override;
 
   Square square1;
   Square square2;
+
 
 protected:
   void calculate() override;
