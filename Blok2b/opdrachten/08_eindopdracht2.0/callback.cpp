@@ -6,7 +6,6 @@
 
 CustomCallback::CustomCallback(float sampleRate)
     : AudioCallback(sampleRate), sampleRate(sampleRate) {
-    std::cout << "Hallo Daan & Ciska" << std::endl;
 }
 
 CustomCallback::~CustomCallback() {
@@ -17,9 +16,14 @@ CustomCallback::~CustomCallback() {
 void CustomCallback::prepare(int sampleRate) {
     this->sampleRate = sampleRate;
 
+
 //-----UI-----------
     //if not created here, out of scope on line 45
     int value = 0;
+
+    std::cout << "\n-----------------------------" << std::endl;
+    std::cout << " Welcome to the SyntherSizer" << std::endl;
+    std::cout << "-----------------------------\n" << std::endl;
 
     // create a string array with the synth type options
     std::string* synthTypeOptions = new std::string[Synth::SynthType::Size];

@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-#define NUM_NOTES2 10
-#define NUM_NOTES 16
+#define NUM_NOTES1 10
+#define NUM_NOTES 19
 
 class Melody
 {
@@ -16,10 +16,10 @@ public:
 
 protected:
   // Cmaj7 -  arpeggio
-  float melody2[NUM_NOTES2] = {60, 64, 67, 71, 64, 67, 64, 69, 60, 55};
+  float melody1[NUM_NOTES1] = {60, 64, 67, 71, 64, 67, 64, 69, 60, 55};
 
-  //Not jingle bells
-  float melody[NUM_NOTES] = {60, 60, 60, 52, 60, 60, 60, 52, 60, 64, 56, 58, 60, 60, 60, 52};
+  // Dissonance
+  float melody[NUM_NOTES] = {71.5,71.5, 67, 63, 69, 62, 58, 54, 60, 67, 70, 67, 63, 72, 54, 73, 58, 69, 73};
   // the index of the current note - readIndex
   int index = 0;
 };

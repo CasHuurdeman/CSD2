@@ -15,20 +15,18 @@ public:
     AdditiveSynth();
     ~AdditiveSynth();
 
-    void tick() override;
     void setFrequency(float freq) override;
-
-
-    void setNumOfHarmonics(int numOfHarmonics);
+    void setNumOfHarmonics(int numOfHarmonics) override;
 
 
 protected:
-    void  calculate();
+    void  calculate() override;
+    void tick() override;
+    void fillSines() override;
 
-    void fillSines();
+    Sine sine;
 
     int numOfHarmonics = 10;
-
     std::vector <Sine> sines;
 };
 

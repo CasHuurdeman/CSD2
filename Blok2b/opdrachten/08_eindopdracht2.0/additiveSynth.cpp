@@ -3,15 +3,11 @@
 //
 #include "additiveSynth.h"
 
-#include <array>
-#include <iostream>
 
 AdditiveSynth::AdditiveSynth() : Synth(){
-      std::cout << "AdditiveSynth - constructor" << std::endl;
 }
 
 AdditiveSynth::~AdditiveSynth(){
-     std::cout << "AdditiveSynth - destructor" << std::endl;
 }
 
 //devided by sines.size() for scaling, *6 to match loudness with organSynth
@@ -37,7 +33,6 @@ void AdditiveSynth::setFrequency(float frequency) {
 }
 
 void AdditiveSynth::fillSines() {
-    Sine sine;
     for (int i = 0; i < numOfHarmonics; i++) {
         sines.push_back(sine); ;
     }

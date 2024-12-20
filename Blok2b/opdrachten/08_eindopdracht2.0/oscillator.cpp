@@ -1,5 +1,4 @@
 #include "oscillator.h"
-#include "math.h"
 
 Oscillator::Oscillator (float frequency, float sampleRate)
   : frequency (frequency),
@@ -19,17 +18,15 @@ void Oscillator::setSamplerate (float sampleRate) {
 float Oscillator::getSample() { return sample; }
 
 
-//getters and setters
 void Oscillator::setFrequency (float frequency) {
-  // TODO
-  // add check to see if parameter is valid
   this->frequency = frequency;
 }
 
 float Oscillator::getFrequency() { return frequency; }
 
+
 void Oscillator::tick() {
-  // increment the phase to allow calculation of next sample
+  // increment the phase to allow calculation of next sample (this can be done more efficiently)
   phase += frequency / sampleRate;
   // wrap the phase to interval [0, 1]
   if (phase > 1) phase -= 1.0f;

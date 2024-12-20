@@ -16,21 +16,18 @@ public:
   OrganSynth();
   ~OrganSynth();
 
-  void tick() override;
-
   void setFrequency(float freq) override;
-
-  Square square1;
-  Square square2;
-
 
 protected:
   void calculate() override;
+  void tick() override;
 
   //otherwise this would be a pure virtual function
   void fillSines() override{};
   void setNumOfHarmonics(int numHarmonics) override{};
 
+  Square square1;
+  Square square2;
 };
 
 #endif //ORGANSYNTH_H

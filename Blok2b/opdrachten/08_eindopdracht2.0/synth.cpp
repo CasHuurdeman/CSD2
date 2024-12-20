@@ -22,15 +22,13 @@ void Synth::updatePitch(Melody& melody, Synth& synth) {
     setFrequency(freq);
 }
 
-void Synth::setSynthType(SynthType type)
-{
+void Synth::setSynthType(SynthType type){
     std::cout << "\nUsing " << synthTypeToString(type) << " as synthType"
               << std::endl;
 }
 
 
-std::string Synth::synthTypeToString(SynthType type)
-{
+std::string Synth::synthTypeToString(SynthType type){
     switch(type) {
         case SynthType::OrganSynth:
             return "OrganSynth";

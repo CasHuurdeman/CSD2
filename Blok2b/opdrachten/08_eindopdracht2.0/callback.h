@@ -9,8 +9,9 @@
 
 class CustomCallback : public AudioCallback {
 public:
-  CustomCallback (float sampleRate);
-  ~CustomCallback ();
+  CustomCallback(float sampleRate);
+  ~CustomCallback();
+
   void prepare (int rate) override;
   void process (AudioBuffer buffer) override;
 
@@ -19,9 +20,9 @@ private:
   float sampleRate;
 
   Synth* synth;
+  Melody melody;
 
   float amplitude = 0.25;
-  Melody melody;
   int frameIndex = 0;
 
   /* instead of using bpm and specifying note lenghts we'll make every note
@@ -29,7 +30,7 @@ private:
    *
    * A note of say 500 msec or 0.5 sec, takes 0.5*samplerate samples to be played
    */
-  float noteDelayFactor = 0.25;
+  float noteDelayFactor = 0.13;
 
 };
 

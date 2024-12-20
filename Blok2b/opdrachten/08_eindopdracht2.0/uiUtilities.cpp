@@ -19,7 +19,7 @@ std::string UIUtilities::retrieveInput(std::string selectionOptions[],
                                         int numOptions)
 {
   // show user the allowed options
-  std::cout << "Please enter your selection. You can choice between: ";
+  std::cout << "Please enter your selection. You can choose between: ";
   for(int i = 0; i < numOptions - 1; i++) {
     std::cout << selectionOptions[i] << ", ";
   }
