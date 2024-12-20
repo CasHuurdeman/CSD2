@@ -19,13 +19,15 @@ public:
     void setFrequency(float freq) override;
 
 
-    void printArray();
-    int numOfHarmonics = 50;
+    void setNumOfHarmonics(int numOfHarmonics);
+
 
 protected:
     void  calculate();
 
     void fillSines();
+
+    int numOfHarmonics = 10;
 
     std::vector <Sine> sines;
 };

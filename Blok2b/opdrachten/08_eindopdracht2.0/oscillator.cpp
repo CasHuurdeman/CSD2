@@ -7,11 +7,10 @@ Oscillator::Oscillator (float frequency, float sampleRate)
     phase (0),
     sample (0),
     sampleRate (sampleRate) {
-  std::cout << "Oscillator - constructor\n";
 }
 
 
-Oscillator::~Oscillator() { std::cout << "Oscillator - destructor\n"; }
+Oscillator::~Oscillator() {}
 
 void Oscillator::setSamplerate (float sampleRate) {
   this->sampleRate = sampleRate;

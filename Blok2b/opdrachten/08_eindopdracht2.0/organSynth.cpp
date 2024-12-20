@@ -6,16 +6,12 @@
 #include "square.h"
 
 
-OrganSynth::OrganSynth() : Synth(){
- std::cout << "OrganSynth - constructor" << std::endl;
-}
+OrganSynth::OrganSynth() : Synth(){}
 
-OrganSynth::~OrganSynth(){
-  std::cout << "OrganSynth - destructor" << std::endl;
-}
+OrganSynth::~OrganSynth(){}
 
 void OrganSynth::calculate(){
-  sample = square1.getSample() + square2.getSample();
+  sample = (square1.getSample() + square2.getSample()) *0.5;
 }
 
 void OrganSynth::tick() {

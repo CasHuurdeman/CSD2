@@ -27,6 +27,10 @@ public:
 protected:
   void calculate() override;
 
+  //otherwise this would be a pure virtual function
+  void fillSines() override{};
+  void setNumOfHarmonics(int numHarmonics) override{};
+
 };
 
 #endif //ORGANSYNTH_H

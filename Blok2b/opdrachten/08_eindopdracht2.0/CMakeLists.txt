@@ -1,6 +1,6 @@
 project(08_eindopdracht2.0 VERSION 0.0.1)
 juce_add_console_app(08_eindopdracht2.0 PRODUCT_NAME "08_eindopdracht2.0")
-target_sources(08_eindopdracht2.0 PRIVATE main.cpp melody.cpp
+target_sources(08_eindopdracht2.0 PRIVATE main.cpp melody.cpp UIUtilities.cpp
         synth.cpp organSynth.cpp additiveSynth.cpp
         oscillator.cpp square.cpp sine.cpp saw.cpp
         callback.cpp)

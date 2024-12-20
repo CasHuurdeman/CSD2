@@ -14,11 +14,11 @@ AdditiveSynth::~AdditiveSynth(){
      std::cout << "AdditiveSynth - destructor" << std::endl;
 }
 
-//Amp is in user settings
+//devided by sines.size() for scaling, *6 to match loudness with organSynth
 void AdditiveSynth::calculate(){
     sample = 0;
     for (int i = 0; i < sines.size(); i++) {
-        sample += sines[i].getSample() /sines.size();
+        sample += sines[i].getSample() /sines.size() *6;
     }
 }
 
@@ -29,25 +29,20 @@ void AdditiveSynth::tick() {
     }
 }
 
-void AdditiveSynth::printArray() {
-    std::cout << "array: " << std::endl;
-    for (int i = 0; i < sines.size(); i++) {
-        std::cout << i << std::endl;
-    }
-}
 
 void AdditiveSynth::setFrequency(float frequency) {
     for (int i = 0; i < sines.size(); i++) {
         sines[i].setFrequency(frequency * (i+1));
-    };
-    // std::cout << "Sines0: " << sines[0].getFrequency() << std::endl;
-    // std::cout << "Sines1: " << sines[1].getFrequency() << std::endl;
+    }
 }
 
 void AdditiveSynth::fillSines() {
     Sine sine;
     for (int i = 0; i < numOfHarmonics; i++) {
         sines.push_back(sine); ;
-        std::cout << i << std::endl;
     }
+}
+
+void AdditiveSynth::setNumOfHarmonics(int numHarmonics) {
+    numOfHarmonics = numHarmonics;
 }

@@ -4,13 +4,9 @@
 
 #include "synth.h"
 
-Synth::Synth(){
-  std::cout<<"Synth - constructor"<<std::endl;
-}
+Synth::Synth(){}
 
-Synth::~Synth(){
-	std::cout<<"Synth - destructor"<<std::endl;
-}
+Synth::~Synth(){}
 
 float Synth::getSample() {
     return sample;
@@ -24,4 +20,23 @@ void Synth::updatePitch(Melody& melody, Synth& synth) {
     float note = melody.getNote();
     float freq = mtof (note);
     setFrequency(freq);
+}
+
+void Synth::setSynthType(SynthType type)
+{
+    std::cout << "\nUsing " << synthTypeToString(type) << " as synthType"
+              << std::endl;
+}
+
+
+std::string Synth::synthTypeToString(SynthType type)
+{
+    switch(type) {
+        case SynthType::OrganSynth:
+            return "OrganSynth";
+        case SynthType::AdditiveSynth:
+            return "AdditiveSynth";
+        default:
+            return "Invalid synthType";
+    }
 }

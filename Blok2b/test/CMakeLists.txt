@@ -1,1 +1,2 @@
 add_subdirectory(sineSquareSawFinal)
+add_subdirectory(10_enum_choices)

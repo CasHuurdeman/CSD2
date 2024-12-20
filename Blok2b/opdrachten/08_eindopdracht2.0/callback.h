@@ -3,8 +3,6 @@
 
 #include "audiocomponent.h"
 #include "oscillator.h"
-//#include "sine.h"
-//#include "square.h"
 #include "melody.h"
 #include "organSynth.h"
 #include "additiveSynth.h"
@@ -20,8 +18,6 @@ public:
 private:
   float sampleRate;
 
-//  OrganSynth organSynth;
-//  AdditiveSynth additiveSynth;
   Synth* synth;
 
   float amplitude = 0.25;
@@ -33,7 +29,7 @@ private:
    *
    * A note of say 500 msec or 0.5 sec, takes 0.5*samplerate samples to be played
    */
-  float noteDelayFactor = 0.1;
+  float noteDelayFactor = 0.25;
 
 };
 

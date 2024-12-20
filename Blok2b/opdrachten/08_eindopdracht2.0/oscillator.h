@@ -5,7 +5,7 @@
 class Oscillator {
 public:
   Oscillator (float frequency = 0, float sampleRate = 44100);
-  ~Oscillator();
+  virtual ~Oscillator();
 
   // allow to set samplerate after initialization
   void setSamplerate (float sampleRate);

@@ -2,10 +2,11 @@
 #include "melody.h"
 #include "square.h"
 #include "synth.h"
+#include "UIUtilities.h"
 
 CustomCallback::CustomCallback(float sampleRate)
     : AudioCallback(sampleRate), sampleRate(sampleRate) {
-    std::cout << "Hallo Ciska" << std::endl;
+    std::cout << "Hallo Daan & Ciska" << std::endl;
 }
 
 CustomCallback::~CustomCallback() {
@@ -15,10 +16,38 @@ CustomCallback::~CustomCallback() {
 
 void CustomCallback::prepare(int sampleRate) {
     this->sampleRate = sampleRate;
-    std::cout << "\nsampleRate: " << sampleRate << "\n";
 
-    synth = new AdditiveSynth();
-    synth->fillSines();
+//-----UI-----------
+    //if not created here, out of scope on line 45
+    int value = 0;
+
+    // create a string array with the synth type options
+    std::string* synthTypeOptions = new std::string[Synth::SynthType::Size];
+    for(int i = 0; i < Synth::SynthType::Size; i++) {
+        synthTypeOptions[i] = Synth::synthTypeToString((Synth::SynthType)i);
+    }
+
+    // retrieve the user selection in form of an enum
+    Synth::SynthType synthType = (Synth::SynthType)
+      UIUtilities::retrieveSelectionIndex(synthTypeOptions, Synth::SynthType::Size);
+
+    //Retrieve number of
+    if (synthType == 1) {
+        std::cout << "\nSelect number of harmonics, " << std::endl;
+        value =  UIUtilities::retrieveValueInRange(1, 50);
+    }
+
+//------END UI-------
+
+    if (synthType == 1) {
+        synth = new AdditiveSynth();
+        synth->setNumOfHarmonics(value);
+        synth->fillSines();
+    }
+    else {
+        synth = new OrganSynth();
+    }
+
 
     synth->updatePitch(melody, *synth);
 }

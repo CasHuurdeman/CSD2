@@ -5,8 +5,6 @@
 #include "sine.h"
 #include "math.h"
 
-Sine::Sine (float frequency, float samplerate) : Oscillator (frequency, samplerate) {
-  std::cout << "Sine::Sine constructor\n";
-}
+Sine::Sine (float frequency, float samplerate) : Oscillator (frequency, samplerate) {}
 
 void Sine::calculate() { sample = sin (pi * 2 * phase) * amplitude; }

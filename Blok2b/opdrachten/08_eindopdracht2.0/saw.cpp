@@ -7,7 +7,6 @@
 
 Saw::Saw(float frequency, float sampleRate) : Oscillator()
 {
-    std::cout << "Saw - constructor\n";
     this->frequency = frequency;
     this->sampleRate = sampleRate;
 }
