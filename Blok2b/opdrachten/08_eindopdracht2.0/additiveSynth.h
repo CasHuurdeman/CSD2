@@ -26,7 +26,7 @@ protected:
 
     Sine sine;
 
-    int numOfHarmonics = 10;
+    int numOfHarmonics;
     std::vector <Sine> sines;
 };
 

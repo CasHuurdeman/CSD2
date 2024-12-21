@@ -16,6 +16,7 @@ float Synth::mtof(float midiPitch){
     return 440.0 * pow (2.0, (midiPitch - 69.0f) / 12.0f);
 }
 
+//setting new frequency of the melody
 void Synth::updatePitch(Melody& melody, Synth& synth) {
     float note = melody.getNote();
     float freq = mtof (note);

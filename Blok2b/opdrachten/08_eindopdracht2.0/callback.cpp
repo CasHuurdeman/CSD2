@@ -8,6 +8,7 @@ CustomCallback::CustomCallback(float sampleRate)
     : AudioCallback(sampleRate), sampleRate(sampleRate) {
 }
 
+//deleting the pointers
 CustomCallback::~CustomCallback() {
     delete synth;
     synth = nullptr;
@@ -18,7 +19,7 @@ void CustomCallback::prepare(int sampleRate) {
 
 
 //-----UI-----------
-    //if not created here, out of scope on line 45
+    //if 'value' is not created here, it's out of scope on line 49
     int value = 0;
 
     std::cout << "\n-----------------------------" << std::endl;

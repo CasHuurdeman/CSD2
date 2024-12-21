@@ -24,7 +24,7 @@ void Oscillator::setFrequency (float frequency) {
 
 float Oscillator::getFrequency() { return frequency; }
 
-
+//function to tick to the new sample
 void Oscillator::tick() {
   // increment the phase to allow calculation of next sample (this can be done more efficiently)
   phase += frequency / sampleRate;

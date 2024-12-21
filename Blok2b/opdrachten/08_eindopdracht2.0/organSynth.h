@@ -22,7 +22,7 @@ protected:
   void calculate() override;
   void tick() override;
 
-  //otherwise this would be a pure virtual function
+  //declaring the functions because otherwise this would be an abstract class
   void fillSines() override{};
   void setNumOfHarmonics(int numHarmonics) override{};
 

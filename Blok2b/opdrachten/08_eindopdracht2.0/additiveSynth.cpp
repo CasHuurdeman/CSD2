@@ -32,6 +32,7 @@ void AdditiveSynth::setFrequency(float frequency) {
     }
 }
 
+//filling the vector "sines" with sine objects
 void AdditiveSynth::fillSines() {
     for (int i = 0; i < numOfHarmonics; i++) {
         sines.push_back(sine); ;
