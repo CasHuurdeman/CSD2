@@ -22,9 +22,12 @@ void CustomCallback::prepare(int sampleRate) {
     //if 'value' is not created here, it's out of scope on line 49
     int value = 0;
 
-    std::cout << "\n-----------------------------" << std::endl;
-    std::cout << " Welcome to the SyntherSizer" << std::endl;
-    std::cout << "-----------------------------\n" << std::endl;
+    std::cout << "\n-------------------------------" << std::endl;
+    std::cout << "-------------------------------" << std::endl;
+    std::cout << "- Welcome to the SyntherSizer -\n-         "
+                 "  By Cas Huurdeman  -" << std::endl;
+    std::cout << "-------------------------------" << std::endl;
+    std::cout << "-------------------------------\n" << std::endl;
 
     // create a string array with the synth type options
     std::string* synthTypeOptions = new std::string[Synth::SynthType::Size];
@@ -67,7 +70,7 @@ void CustomCallback::process(AudioBuffer buffer) {
     for (int sample = 0u; sample < numFrames; ++sample) {
         for (int channel = 0u; channel < numOutputChannels; ++channel) {
             outputChannels[channel][sample] = 0.0f;
-            outputChannels[channel][sample] = synth->getSample() * amplitude;
+            outputChannels[channel][sample] = synth->getSample() * synth->amplitude;
         }
         //tick has to be after the channel loop
         synth->tick();
@@ -76,7 +79,7 @@ void CustomCallback::process(AudioBuffer buffer) {
          * This is a bit awkward in this scheme of buffers per channel
          *  In a multichannel setting we should update pitches independently per channel!
          */
-        if (frameIndex >= noteDelayFactor * sampleRate) {
+        if (frameIndex >= synth->noteDelayFactor * sampleRate) {
             frameIndex = 0;
             synth->updatePitch(melody, *synth);
         } else {

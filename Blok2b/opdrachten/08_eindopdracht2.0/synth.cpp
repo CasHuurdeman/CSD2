@@ -12,6 +12,10 @@ float Synth::getSample() {
     return sample;
 }
 
+float Synth::getAmplitude() {
+    return amplitude;
+}
+
 float Synth::mtof(float midiPitch){
     return 440.0 * pow (2.0, (midiPitch - 69.0f) / 12.0f);
 }

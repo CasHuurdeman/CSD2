@@ -24,7 +24,7 @@ std::string UIUtilities::retrieveInput(std::string selectionOptions[],
     std::cout << selectionOptions[i] << ", ";
   }
   // print last option outside forloop to end with an .
-  std::cout << selectionOptions[numOptions - 1] << "." << std::endl;
+  std::cout << selectionOptions[numOptions - 1] << ".\n" << std::endl;
   // retrieve and return choice
   std::string selection = "";
   std::cin >> selection;
@@ -44,7 +44,7 @@ std::string UIUtilities::retrieveSelection(std::string selectionOptions[], int n
                                               numOptions);
     // if selection is not correct, log message to user to try again
     if(noCorrectSelection) {
-      std::cout << "Incorrect selection, please try again";
+      std::cout << "\nIncorrect selection, please try again.\n";
     }
   }
   return userSelection;
@@ -73,7 +73,7 @@ int UIUtilities::retrieveValueInRange(int min, int max) {
 
   while(notInRange) {
     std::cout << "Please enter a value between " << min << " and " << max
-              << std::endl;
+             << "\n" << std::endl;
     // first capture input in input string
     std::cin >> input;
     // validate if input string can be transformed into a float
@@ -84,7 +84,7 @@ int UIUtilities::retrieveValueInRange(int min, int max) {
         notInRange = false;
       } else {
         // value not in range
-        std::cout << "Incorrect range, please try again." << std::endl;
+        std::cout << "\nIncorrect range, please try again." << std::endl;
       }
     } catch (const std::exception& e) {
       // no float as input
