@@ -15,7 +15,7 @@ public:
   float read();
   void setDelay();
 
-  void incrementHead(uint& head);
+  void incrementHead(int& head);
   void tick();
 
   float delay();
@@ -26,7 +26,7 @@ private:
   std::vector<float> m_buffer;
   uint m_numSamplesDelay;
 
-  uint m_wHead = 0;
-  uint m_rHead = 0;
+  int m_wHead = 0;
+  int m_rHead = 0;
 
 };

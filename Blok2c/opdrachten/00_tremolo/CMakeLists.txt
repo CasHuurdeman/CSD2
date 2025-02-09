@@ -1,9 +1,9 @@
-project(01_tremolo VERSION 0.0.1)
-juce_add_console_app(01_tremolo PRODUCT_NAME "01_tremolo")
-target_sources(01_tremolo PRIVATE main.cpp tremolo.cpp callback.cpp)
-target_compile_definitions(01_tremolo PRIVATE JUCE_WEB_BROWSER=0 JUCE_USE_CURL=0 SOURCE_DIR=".")
+project(00_tremolo VERSION 0.0.1)
+juce_add_console_app(00_tremolo PRODUCT_NAME "00_tremolo")
+target_sources(00_tremolo PRIVATE main.cpp tremolo.cpp callback.cpp)
+target_compile_definitions(00_tremolo PRIVATE JUCE_WEB_BROWSER=0 JUCE_USE_CURL=0 SOURCE_DIR=".")
 
-target_link_libraries(01_tremolo PRIVATE
+target_link_libraries(00_tremolo PRIVATE
         oscillators
         audio
 
@@ -17,4 +17,4 @@ target_link_libraries(01_tremolo PRIVATE
         #        juce::juce_recommended_warning_flags
 )
 
-target_compile_features(01_tremolo PRIVATE cxx_std_20)
+target_compile_features(00_tremolo PRIVATE cxx_std_20)

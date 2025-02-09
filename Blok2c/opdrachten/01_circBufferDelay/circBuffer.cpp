@@ -22,7 +22,7 @@ void CircBuffer::setDelay(){
   m_rHead = m_wHead - m_numSamplesDelay;
 }
 
-void CircBuffer::incrementHead(uint& head){
+void CircBuffer::incrementHead(int& head){
   if(head >= m_buffer.size()){
     head -= m_buffer.size();
   }
