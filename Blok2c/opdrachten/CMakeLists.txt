@@ -1,2 +1,3 @@
 add_subdirectory(00_tremolo)
 add_subdirectory(01_circBufferDelay)
+add_subdirectory(04_interpolation)

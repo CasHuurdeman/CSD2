@@ -5,8 +5,9 @@ CircBuffer::CircBuffer(uint size, uint numSamplesDelay)
 {
   std::cout << "CircBuffer::CircBuffer()" << std::endl;
 
-  m_buffer.resize(size);
+  m_size = size;
   m_numSamplesDelay = numSamplesDelay;
+  allocateBuffer();
 }
 
 
@@ -23,8 +24,8 @@ void CircBuffer::setDelay(){
 }
 
 void CircBuffer::incrementHead(int& head){
-  if(head >= m_buffer.size()){
-    head -= m_buffer.size();
+  if(head >= m_size){
+    head -= m_size;
   }
   else { head += 1; }
 }
@@ -35,10 +36,22 @@ void CircBuffer::tick(){
   incrementHead(m_wHead);
   incrementHead(m_rHead);
 }
+void CircBuffer::allocateBuffer()
+{
+  // allocate buffer and set all samples to 0
+  m_buffer = (float*)malloc(m_size * sizeof(float));
+  memset(m_buffer, 0, m_size * sizeof(float));
+}
 
+void CircBuffer::releaseBuffer()
+{
+  // free data allocated with memset
+  free(m_buffer);
+}
 
 CircBuffer::~CircBuffer()
 {
   std::cout << "CircBuffer::~CircBuffer()" << std::endl;
   // TODO - release the dynamic allocated array
+  releaseBuffer();
 }

@@ -21,12 +21,15 @@ public:
   float delay();
 
 
+  void allocateBuffer();
+  void releaseBuffer();
+
 private:
 
-  std::vector<float> m_buffer;
+  float* m_buffer;
   uint m_numSamplesDelay;
 
   int m_wHead = 0;
   int m_rHead = 0;
-
+  uint m_size = 0;
 };
