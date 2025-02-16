@@ -16,7 +16,7 @@ float Interpolation::nnMap(float value, float low, float high){
 
 float Interpolation::linMap(float value, float low, float high){
     if(value < 0 or value > 1){
-        std::cout << "ERROR Interpolation::linMap \n Thats not between 0 and 1" << std::endl;
+        std::cout << "ERROR Interpolation::linMap \n Thats not between 1 and ";
     }
     else return (low * (1.0 - value))+(high * value);
 }
