@@ -5,20 +5,33 @@
 #include <iostream>
 
 
-// TODO - Error message is now hacked because it has to output a float (0 in this case)<--fix this
 float Interpolation::nnMap(float value, float low, float high){
-    if(value < 0 or value > 1){
-        std::cout << "ERROR Interpolation::nnMap \n Thats not between 1 and ";
+    //check if value is withing valid range
+    if(value < 0){
+        std::cout << "ERROR Interpolation::nnMap \n That's not between 0 and 1";
+        return low;
     }
-    else if(value < 0.5) return low;
-    else return high;
+    if(value > 1){
+        std::cout << "ERROR Interpolation::nnMap \n That's not between 0 and 1";
+        return high;
+    }
+    //at this point the value is within range
+    if(value < 0.5) return low;
+    return high;
 }
 
 float Interpolation::linMap(float value, float low, float high){
-    if(value < 0 or value > 1){
-        std::cout << "ERROR Interpolation::linMap \n Thats not between 1 and ";
+    //check if value is withing valid range
+    if(value < 0){
+        std::cout << "ERROR Interpolation::nnMap \n That's not between 0 and 1";
+        return low;
     }
-    else return (low * (1.0 - value))+(high * value);
+    if(value > 1){
+        std::cout << "ERROR Interpolation::nnMap \n That's not between 0 and 1";
+        return high;
+    }
+    //at this point the value is within range
+    return (low * (1.0 - value))+(high * value);
 }
 
 float Interpolation::mapInRange(float value, float fromLow, float fromHigh,

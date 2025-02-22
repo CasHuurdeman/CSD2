@@ -11,12 +11,12 @@ void CustomCallback::prepare(int rate) {
 
 void CustomCallback::process(AudioBuffer buffer) {
   auto [inputChannels, outputChannels, numInputChannels, numOutputChannels, numFrames] = buffer;
-  float sample;
-  float sample2;
+  float sample1, sample2;
+
   for (int channel = 0u; channel < numInputChannels; channel++) {
     for (int i = 0u; i < numFrames; i++) {
-      tremolo.processFrame(inputChannels[channel][i],  sample);
-      delay.processFrame(sample,  sample2);
+      tremolo.processFrame(inputChannels[channel][i],  sample1);
+      delay.processFrame(sample1,  sample2);
       waveShaper.processFrame(sample2, outputChannels[channel][i]);
     }
   }

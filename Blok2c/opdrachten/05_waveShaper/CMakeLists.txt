@@ -6,6 +6,7 @@ target_compile_definitions(05_waveShaper PRIVATE JUCE_WEB_BROWSER=0 JUCE_USE_CUR
 target_link_libraries(05_waveShaper PRIVATE
         oscillators
         audio
+        interpolation
 
         juce::juce_audio_basics
         juce::juce_audio_devices

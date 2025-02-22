@@ -17,7 +17,7 @@ private:
   float samplerate = 44100;
   Tremolo tremolo = Tremolo(6, 1);
   Delay delay;
-  WaveShaper waveShaper = WaveShaper(4069);
+  WaveShaper waveShaper = WaveShaper(4096);
 };
 
 #endif //CALLBACK_H
