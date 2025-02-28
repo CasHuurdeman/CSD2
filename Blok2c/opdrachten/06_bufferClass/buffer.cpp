@@ -9,14 +9,11 @@ Buffer::Buffer(int bufferSize){
     for (int i = 0; i < bufferSize; i++) {
         buffer[i] = 0;
     }
-
-    std::cout << "Buffer::Buffer - constructor" << std::endl;
 }
 
 Buffer::~Buffer(){
     delete [] buffer;
     buffer = nullptr;
-    std::cout << "Buffer::Buffer - deconstructor" << std::endl;
 }
 
 

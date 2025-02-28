@@ -17,10 +17,7 @@ class WaveShaper : public Effect {
     void billFuffer();
 
   private:
-  float k = 10.0f;
-//  float* buffer;
-  // int bufferSize;
-
+  float k = -100.0f;
   Buffer buffer;
 };
 

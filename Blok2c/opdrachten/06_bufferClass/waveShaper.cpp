@@ -5,23 +5,12 @@
 #include <iostream>
 #include <interpolation.h>
 
-//FIXME - this whole effect definitely doesnt work like this, 05_waveShaper does work
-
 WaveShaper::WaveShaper(int bufferSize){
-//    buffer = new float[bufferSize];
-//    for (int i = 0; i < bufferSize; i++) {
-//        buffer[i] = 0;
-//    }
-//
-    // this->bufferSize = bufferSize;
-
     buffer.setBufferSize(bufferSize);
     billFuffer();
 }
 
 WaveShaper::~WaveShaper() {
-//    delete [] buffer; //TODO - look into brackets []
-//    buffer = nullptr;
 }
 
 void WaveShaper::applyEffect(const float &input, float &output){
@@ -34,11 +23,15 @@ void WaveShaper::applyEffect(const float &input, float &output){
     output = Interpolation::linMap(indexDecimal, buffer.buffer[i], buffer.buffer[i + 1]);
 }
 
-//TODO - add validation,
-//maybe comment parameter k
+//TODO - add validation boolean to turn it off
 void WaveShaper::setK(float k) {
+    if (-50.0f < k or k > 50.0f) {
+        std::cout << "thats a bit much huh? " << std::endl;
+    }
+    else {
     this->k = k;
     billFuffer();
+    }
 }
 
 //TODO - comments

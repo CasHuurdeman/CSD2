@@ -8,11 +8,12 @@
 class Buffer {
 public:
   Buffer() = default;
-  Buffer( int bufferSize);
+  Buffer(int bufferSize);
   ~Buffer();
 
   void setBufferSize(int bufferSize);
   int getBufferSize();
+
   float* buffer= nullptr;
 
 
