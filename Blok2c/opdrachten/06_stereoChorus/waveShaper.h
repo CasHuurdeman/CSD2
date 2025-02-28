@@ -18,10 +18,10 @@ class WaveShaper : public Effect {
 
   private:
   float k = 10.0f;
-  float* buffer;
-  int bufferSize;
-//
-//  Buffer CircBuffer = Buffer(bufferSize);
+//  float* buffer;
+  // int bufferSize;
+
+  Buffer buffer;
 };
 
 
