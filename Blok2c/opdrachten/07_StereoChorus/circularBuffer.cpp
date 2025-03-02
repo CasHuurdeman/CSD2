@@ -36,24 +36,26 @@ int CircularBuffer::getBufferSize(){
   return bufferSize;
 }
 
-//wrap function is inside incrementHead
-void CircularBuffer::incrementHead(int& head){
-    if(head >= bufferSize){
-        head -= bufferSize;
-    }
-    else { head += 1; }
+
+
+void CircularBuffer::write(float sample) {
+    buffer[writeHead] = sample;
 }
 
 float CircularBuffer::read() {
    return buffer[readHead];
 }
 
-void CircularBuffer::write(float sample) {
-    buffer[writeHead] = sample;
-}
-
 void CircularBuffer::setDelay() {
     readHead = writeHead - numSamplesDelay;
+}
+
+//wrap function is inside incrementHead
+void CircularBuffer::incrementHead(int& head){
+    if(head >= bufferSize){
+        head -= bufferSize;
+    }
+    else { head += 1; }
 }
 
 void CircularBuffer::tick() {

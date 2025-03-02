@@ -1,9 +1,7 @@
 //
 // Created by cashu on 15/02/2025.
 //
-
-#ifndef Buffer_H
-#define Buffer_H
+#pragma once
 
 class CircularBuffer {
 public:
@@ -31,5 +29,3 @@ private:
   int numSamplesDelay;
 
 };
-
-#endif //Buffer_H
