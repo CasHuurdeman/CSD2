@@ -4,6 +4,7 @@
 #include "tremolo.h"
 #include "delay.h"
 #include "waveShaper.h"
+#include "chorus.h"
 
 
 class CustomCallback : public AudioCallback {
@@ -16,7 +17,7 @@ private:
   float samplerate = 44100;
   Tremolo tremolo = Tremolo(6, 1);
   Delay delay;
-  //FIXME - verkeerde haakjes?
   WaveShaper waveShaper = WaveShaper(4096);
+  Chorus chorus = Chorus(1,1,0.5);
 
 };

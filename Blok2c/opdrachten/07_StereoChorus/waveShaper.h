@@ -16,6 +16,7 @@ class WaveShaper : public Effect {
     void billFuffer();
 
   private:
+  //k is just a standard parameter value in mathematics
   float k = 10.0f;
   float* buffer;
   int bufferSize;

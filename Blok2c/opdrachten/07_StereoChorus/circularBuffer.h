@@ -11,8 +11,13 @@ public:
 
   void setBufferSize(int bufferSize);
   int getBufferSize();
+  void setNumSamplesDelay(float numSamplesDelay);
+  int getNumSamplesDelay();
+  int getReadHead();
+  int getWriteHead();
 
-  void incrementHead(int& head);
+  void wrapRH();
+  void wrapWH();
   void setDelay();
   float read();
   void write(float sample);

@@ -31,9 +31,11 @@ void WaveShaper::applyEffect(const float &input, float &output){
     output = Interpolation::linMap(indexDecimal, buffer[i], buffer[i + 1]);
 }
 
-//TODO - add validation,
-//maybe comment parameter k
+
 void WaveShaper::setK(float k) {
+    //-20 and 21 are chosen 'randomly'
+    //21 instead of 20 because it's funny
+    if (k < -20 || k > 21)
     this->k = k;
     billFuffer();
 }
