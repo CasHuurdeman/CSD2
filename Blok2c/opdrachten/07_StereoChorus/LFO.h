@@ -8,16 +8,20 @@
 #include <saw.h>
 #include <triangle.h>
 
+//TODO - wavetable osc?
 class LFO {
 //enum before constructor list to use it in the constructor
+
+public:
+  //TODO - osc pointer
   enum Waveform {
     sine = 0,
     square,
     saw,
     triangle
   };
+  //
 
-public:
   LFO(float rate, float depth, Waveform waveform);
   ~LFO();
 

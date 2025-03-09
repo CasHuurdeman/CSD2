@@ -6,7 +6,7 @@
 class CircularBuffer {
 public:
   CircularBuffer() = default;
-  CircularBuffer(int bufferSize, int numSamplesDelay);
+  CircularBuffer(int bufferSize, float numSamplesDelay);
   ~CircularBuffer();
 
   void setBufferSize(int bufferSize);
@@ -26,6 +26,6 @@ private:
 
   int readHead;
   int writeHead;
-  int numSamplesDelay;
+  float numSamplesDelay;
 
 };

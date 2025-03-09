@@ -6,7 +6,7 @@
 #include <audioToFile.h>
 
 
-#define WRITE_TO_FILE 0
+#define WRITE_TO_FILE 1
 
 
 int main(int argc, char **argv) {

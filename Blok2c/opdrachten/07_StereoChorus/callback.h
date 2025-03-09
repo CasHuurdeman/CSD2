@@ -16,5 +16,7 @@ private:
   float samplerate = 44100;
   Tremolo tremolo = Tremolo(6, 1);
   Delay delay;
+  //FIXME - verkeerde haakjes?
   WaveShaper waveShaper = WaveShaper(4096);
+
 };

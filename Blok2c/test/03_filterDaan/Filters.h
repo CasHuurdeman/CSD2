@@ -41,12 +41,12 @@ private:
 //
 class FIRFilter : public Filter {
     public:
-    float process(float input) override {
+    void process(const float& input, float& output) {
         // Y[n] = X[n] - bX[n-1]
-        auto output = input - (b * x1);
+        output = input - (b * x1);
 
         x1 = input; // Recaching Delay
-        return output;
+        // return output;
     }
 
     void setCoefficient(float coefficient) {
@@ -59,7 +59,7 @@ private:
 
 };
 
-
+// MET SCALING
 //                   OnePole
 //   X[n] --(b)->(+)--->[ 1 sample ] ---> Y[n]
 //              |                   |
@@ -71,6 +71,8 @@ class OnePole : public Filter {
         // Y[n] = bX[n] + aY[n-1]
         // You make this one:
 
+        feedback = b * input + a * feedback;
+        return feedback;
     }
 
     void setCoefficient(float coefficient) {
@@ -90,8 +92,21 @@ private:
 //
 class SimpleLadder :  public Filter {
     public:
-    float process(float input) override {
+    SimpleLadder() {
+        for (int i = 0; i < 4; i++) {
+            OnePole onePole;
+            array[i] = onePole;
+            array[i].setCoefficient(0.9f);
+        }
+    }
 
+    float process(float input) override {
+        //FIXME - maak af
+        for (int i = 0; i < 4; i++) {
+            input = array[i].process(input);
+        }
+        feedback = input;
+        return feedback;
     }
 
     void setCoefficient(float coefficient) {
@@ -100,11 +115,9 @@ class SimpleLadder :  public Filter {
     }
 
 private:
-    float A { 0.0 };
-    float B { 0.0 };
-    float C { 0.0 };
-    float D { 0.0 };
+    float feedback { 0.0 };
 
+    std::array<OnePole, 4> array;
 
     float b { 0.0 };
     float a { 0.0 };
@@ -119,8 +132,15 @@ private:
 class FourSample :  public Filter {
     public:
     float process(float input) override {
-        // Y[n] = X[n] + aY[n-4]
+        // Y[n] = bX[n] + aY[n-4]
 
+        //feedback = sample delayed by 4
+        feedback = vector.at(3);
+        vector.insert(vector.begin, input);
+        vector.pop_back();
+
+        output = b * input + a* feedback;
+        return output;
     }
 
     void setCoefficient(float coefficient) {
@@ -130,7 +150,9 @@ class FourSample :  public Filter {
 
 
 private:
+    std::vector<float> vector {0.0, 0.0, 0.0, 0.0};
     float feedback { 0.0 };
+    float output {0.0};
     float b { 0.0 };
     float a { 0.0 };
 };
@@ -149,6 +171,16 @@ class HalfBiquad :  public Filter {
     float process(float input) override {
       // y[n] = bX[n] - a1Y[n-1] - a2Y[n-2]
 
+        //feedback = sample delayed by 4
+        feedback1 = vector.at(0);
+        feedback2 = vector.at(1);
+        vector.insert(vector.begin, input);
+        vector.pop_back();
+
+        output = b * input + a1 * feedback1 + a2 * feedback2;
+        return output;
+
+
     }
 
     void setBCoefficient(float coefficient){
@@ -165,6 +197,10 @@ class HalfBiquad :  public Filter {
 
 
 private:
+    std::vector<float> vector {0.0, 0.0};
+    float feedback1 {0.0};
+    float feedback2 {0.0};
+    float output {0.0};
     float b;
     float a1;
     float a2;

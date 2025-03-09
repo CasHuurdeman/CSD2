@@ -18,9 +18,7 @@ private:
 
   //LFO rate 0 delay - 10 delay bijv.
   //LFODepth --> amount of delay
-  //
+  //Do I want modDepth in Chorus or in LFO?
   //FIXME - why doesnt this work
-  LFO LFO(2.0f, 1.0f, triangle);
-
-
+  LFO LFO{2.0f, 1.0f, LFO::triangle};
 };

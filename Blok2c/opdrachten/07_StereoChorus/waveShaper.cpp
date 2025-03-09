@@ -17,7 +17,7 @@ WaveShaper::WaveShaper(int bufferSize){
 }
 
 WaveShaper::~WaveShaper() {
-    delete [] buffer; //TODO - look into brackets []
+    delete [] buffer;
     buffer = nullptr;
 }
 

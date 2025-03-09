@@ -4,7 +4,7 @@
 #include "circularBuffer.h"
 #include <iostream>
 
-CircularBuffer::CircularBuffer(int bufferSize, int numSamplesDelay) {
+CircularBuffer::CircularBuffer(int bufferSize, float numSamplesDelay) {
     buffer = new float[bufferSize];
     for (int i = 0; i < bufferSize; i++) {
         buffer[i] = 0;
@@ -47,7 +47,7 @@ float CircularBuffer::read() {
 }
 
 void CircularBuffer::setDelay() {
-    readHead = writeHead - numSamplesDelay;
+    readHead = writeHead - (int)numSamplesDelay;
 }
 
 //wrap function is inside incrementHead
