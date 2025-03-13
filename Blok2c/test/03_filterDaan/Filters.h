@@ -101,7 +101,6 @@ class SimpleLadder :  public Filter {
     }
 
     float process(float input) override {
-        //FIXME - maak af
         for (int i = 0; i < 4; i++) {
             input = array[i].process(input);
         }
@@ -129,15 +128,17 @@ private:
 //              |                   |
 //             (a)<-----------------
 //
+
+//TODO - dynamic allocation or queue insteead of vector
 class FourSample :  public Filter {
     public:
     float process(float input) override {
         // Y[n] = bX[n] + aY[n-4]
 
         //feedback = sample delayed by 4
-        feedback = vector.at(3);
-        vector.insert(vector.begin, input);
-        vector.pop_back();
+        feedback = delay.at(3);
+        delay.insert(delay.begin, input);
+        delay.pop_back();
 
         output = b * input + a* feedback;
         return output;
@@ -150,7 +151,7 @@ class FourSample :  public Filter {
 
 
 private:
-    std::vector<float> vector {0.0, 0.0, 0.0, 0.0};
+    std::vector<float> delay {0.0, 0.0, 0.0, 0.0};
     float feedback { 0.0 };
     float output {0.0};
     float b { 0.0 };
@@ -172,10 +173,10 @@ class HalfBiquad :  public Filter {
       // y[n] = bX[n] - a1Y[n-1] - a2Y[n-2]
 
         //feedback = sample delayed by 4
-        feedback1 = vector.at(0);
-        feedback2 = vector.at(1);
-        vector.insert(vector.begin, input);
-        vector.pop_back();
+        feedback1 = delay.at(0);
+        feedback2 = delay.at(1);
+        delay.insert(delay.begin, input);
+        delay.pop_back();
 
         output = b * input + a1 * feedback1 + a2 * feedback2;
         return output;
@@ -197,7 +198,7 @@ class HalfBiquad :  public Filter {
 
 
 private:
-    std::vector<float> vector {0.0, 0.0};
+    std::vector<float> delay {0.0, 0.0};
     float feedback1 {0.0};
     float feedback2 {0.0};
     float output {0.0};

@@ -1,6 +1,6 @@
 # header only files need INTERFACE
 add_library(audio_header INTERFACE)
-target_include_directories(audio_header INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/audiocomponent.h)
+target_include_directories(audio_header INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/audiocomponent.h /delayMath.h /diracDelta.h)
 
 # STATIC means it will be baked into the binary (shared is also an option where that doesn't happen)
 add_library(audio STATIC audioToFile.cpp bufferDebugger.cpp)

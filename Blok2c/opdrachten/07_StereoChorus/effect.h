@@ -29,7 +29,7 @@ private:
   float dryWet;
   float wetDry; // = 1 - dryWet
   // cache last sample
-  float m_sample;
+  float m_sample = 0;
   /*
    * NOTE: other possible extra base class functionality:
    * • bypass

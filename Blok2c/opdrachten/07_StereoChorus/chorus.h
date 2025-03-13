@@ -3,9 +3,10 @@
 //
 #pragma once
 
-#include "triangle.h"
+#include "sine.h"
 #include "effect.h"
 #include "circularBuffer.h"
+#include "delayMath.h"
 
 //minDelay is not a user parameter
 class Chorus : public Effect{
@@ -25,19 +26,17 @@ public:
 
 
 private:
-    float* buffer;
     //TODO - make an osc pointer
-    Triangle triangle;
+    //FIXME - TRIANGLE
+    Sine sine;
     CircularBuffer circBuffer;
 
     //TODO - change phase of the osc for stereo delay
 
-    //TODO - make a delay in samples to seconds method (or in audio library)
     //rate = LFO freq
     float rate;
     //depth = LFO amp
-    //TODO - make depth a normalised value
     float depth;
     float feedback;
-    float modSignal;
+    float modSignal = 0;
 };

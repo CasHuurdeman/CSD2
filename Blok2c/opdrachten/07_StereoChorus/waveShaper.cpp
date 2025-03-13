@@ -24,7 +24,7 @@ WaveShaper::~WaveShaper() {
 void WaveShaper::applyEffect(const float &input, float &output){
 
     // map range [-1, 1] to [0, bufferSize - 1]
-    float index = (input + 1.0f) * (0.5f * bufferSize);
+    float index = (input + 1.0f) * (0.5f * (float)bufferSize);
     // interpolate! index lies in between 2 indices
     int i = (int)index;
     float indexDecimal = index - (float)i;

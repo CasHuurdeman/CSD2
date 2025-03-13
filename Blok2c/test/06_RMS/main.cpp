@@ -1,12 +1,14 @@
 //
 // Created by cashu on 09/03/2025.
 //
-#include "square.h"
+#include "sine.h"
 # include <iostream>
 
+
+//TODO -Loudness meter?
 int main() {
 
-    Square sine(500);
+    Sine sine(500);
 
     int bufferSize = 4096;
 
@@ -19,10 +21,12 @@ int main() {
     //POWER:
     float feedback {0.0};
     for (int i = 0; i < bufferSize; i++) {
-        feedback = feedback + fabs(buffer[i]);
+        feedback = feedback + (buffer[i] * buffer[i]);
     }
 
-    std::cout << feedback << std::endl;
+    // devided by bufferSize for RMS (root MEAN square)
+     //--> RMS niet met absoluutstrepen
+    std::cout << sqrt(feedback/bufferSize) << std::endl;
 
 
     delete [] buffer;

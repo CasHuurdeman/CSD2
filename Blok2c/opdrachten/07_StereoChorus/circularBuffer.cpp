@@ -36,51 +36,34 @@ int CircularBuffer::getBufferSize(){return bufferSize;}
 
 int CircularBuffer::getNumSamplesDelay() {return numSamplesDelay;}
 
-// FIXME - readHead and writeHead now increase as you 'get' them
-int CircularBuffer::getReadHead() {return readHead++;}
-
-int CircularBuffer::getWriteHead() {return writeHead++;}
-
 
 void CircularBuffer::setNumSamplesDelay(float numSamplesDelay) {
     if (numSamplesDelay < 0) {
         throw "CircularBuffer::setNumSamplesDelay - numSamplesDelay exceeds range [0, inf]";
     }
     this-> numSamplesDelay = numSamplesDelay;
+    updateDelay();
 }
 
 
 
 void CircularBuffer::write(float sample) {
-    buffer[writeHead] = sample;
+    buffer[writeHead++] = sample;
+    wrap(writeHead);
 }
 
 float CircularBuffer::read() {
-   return buffer[readHead];
+    wrap(readHead);
+   return buffer[readHead++];
 }
 
-void CircularBuffer::setDelay() {
-    readHead = writeHead - (int)numSamplesDelay;
-}
-
-//TODO - duplicate code
-//wrap function is inside incrementHead
-void CircularBuffer::wrapRH(){
-    if(readHead >= bufferSize){
-        readHead -= bufferSize;
-    }
-}
-
-void CircularBuffer::wrapWH() {
-    if(writeHead >= bufferSize){
-        writeHead -= bufferSize;
-    }
+void CircularBuffer::updateDelay() {
+    readHead = writeHead - (int)numSamplesDelay + bufferSize;
+    //readHead gets changed--> so wrap
+    wrap(readHead);
 }
 
 
-
-// void CircularBuffer::tick() {
-//     setDelay();
-//     incrementHead(writeHead);
-//     incrementHead(readHead);
-// }
+void CircularBuffer::wrap(int &head) {
+    if(head >= bufferSize){head -= bufferSize;}
+}

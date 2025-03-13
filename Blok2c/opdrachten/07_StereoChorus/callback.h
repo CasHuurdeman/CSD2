@@ -18,6 +18,6 @@ private:
   Tremolo tremolo = Tremolo(6, 1);
   Delay delay;
   WaveShaper waveShaper = WaveShaper(4096);
-  Chorus chorus = Chorus(1,1,0.5);
+  Chorus chorus = Chorus(10,1,0.9);
 
 };

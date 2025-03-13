@@ -13,24 +13,21 @@ public:
   int getBufferSize();
   void setNumSamplesDelay(float numSamplesDelay);
   int getNumSamplesDelay();
-  int getReadHead();
-  int getWriteHead();
 
-  void wrapRH();
-  void wrapWH();
-  void setDelay();
+  void updateDelay();
+  void wrap(int &head);
+
   float read();
   void write(float sample);
-  void tick();
 
-  float* buffer= nullptr;
 
 
 private:
+  float* buffer= nullptr;
   int bufferSize;
 
-  int readHead;
-  int writeHead;
-  float numSamplesDelay;
+  int readHead = 0;
+  int writeHead = 0;
+  float numSamplesDelay = 0;
 
 };

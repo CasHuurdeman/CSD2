@@ -13,6 +13,7 @@ class WaveShaper : public Effect {
 
     void setK(float k);
     void applyEffect(const float &input, float &output) override;
+  //billFuffer = fillBuffer
     void billFuffer();
 
   private:

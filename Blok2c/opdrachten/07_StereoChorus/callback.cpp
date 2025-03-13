@@ -15,10 +15,12 @@ void CustomCallback::process(AudioBuffer buffer) {
 
   for (int channel = 0u; channel < numInputChannels; channel++) {
     for (int i = 0u; i < numFrames; i++) {
-      tremolo.processFrame(inputChannels[channel][i],  sample1);
-      delay.processFrame(sample1,  sample2);
-      waveShaper.processFrame(sample2, sample1);
-      chorus.processFrame(sample1, outputChannels[channel][i]);
+      //TODO - effect chain dynamisch met pointers naar verschillende effect objecten
+
+      tremolo.processFrame(inputChannels[channel][i],  outputChannels[channel][i]);
+      // delay.processFrame(sample1,  sample2);
+      // waveShaper.processFrame(sample2, sample1);
+      // chorus.processFrame(inputChannels[channel][i], outputChannels[channel][i]);
     }
   }
 }
