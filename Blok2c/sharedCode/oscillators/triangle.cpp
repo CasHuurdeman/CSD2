@@ -19,12 +19,5 @@ Triangle::~Triangle() {
 //TODO - this function could be cleaner
 void Triangle::calcNextSample()
 {
-    // Triangle functionality comes here
-    if(phase < 0.25) {
-        sample *= 4.0f;
-    }
-    else if (phase < 0.75){
-          sample = sample * -4.0f + 2.0f;
-    }
-    else sample = sample * 4.0f - 4.0f;
+    sample = 4.0f*fabs(phase - 0.5f) -1.0f;
 }

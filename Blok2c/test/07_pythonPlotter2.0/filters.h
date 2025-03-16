@@ -3,22 +3,18 @@
 //
 #pragma once
 
-class Filter {
-public:
-    virtual float process(float input) = 0;
-};
-
 
 //                   IIRFilter
 //   X[n] ---->(+)--->[ 1 sample ] ---> Y[n]
 //              |                   |
 //             (a)<-----------------
 //
-class IIRFilter : public Filter {
+class IIRFilter {
     public:
-    float process(float input) override {
+    float process(float input) {
         // Y[n] = X[n] + aY[n-1]
         feedback = input + (a * feedback);
+        std::cout << feedback << std::endl;
         return feedback;
     }
 
@@ -39,14 +35,14 @@ private:
 //              |                  |
 //             (b)-->[ 1 sample ]-->
 //
-class FIRFilter : public Filter {
+class FIRFilter {
     public:
-    void process(const float& input, float& output) {
+    float process(float input) {
         // Y[n] = X[n] - bX[n-1]
-        output = input - (b * x1);
+        float output = b*input - (b * x1);
 
         x1 = input; // Recaching Delay
-        // return output;
+        return output;
     }
 
     void setCoefficient(float coefficient) {
@@ -65,9 +61,9 @@ private:
 //              |                   |
 //             (a)<-----------------
 //
-class OnePole : public Filter {
+class OnePole {
     public:
-    float process(float input) override {
+    float process(float input) {
         // Y[n] = bX[n] + aY[n-1]
         // You make this one:
 
@@ -90,7 +86,7 @@ private:
 //                   4_Pole / Simple Cascade
 //   X[n]--->[OnePole][OnePole][OnePole][OnePole]--->Y[n]
 //
-class SimpleLadder :  public Filter {
+class SimpleLadder {
     public:
     SimpleLadder() {
         for (int i = 0; i < 4; i++) {
@@ -100,7 +96,7 @@ class SimpleLadder :  public Filter {
         }
     }
 
-    float process(float input) override {
+    float process(float input) {
         for (int i = 0; i < 4; i++) {
             input = array[i].process(input);
         }
@@ -130,9 +126,9 @@ private:
 //
 
 //TODO - dynamic allocation or queue insteead of vector
-class FourSample :  public Filter {
+class FourSample {
     public:
-    float process(float input) override {
+    float process(float input) {
         // Y[n] = bX[n] + aY[n-4]
 
         //feedback = sample delayed by 4
@@ -167,9 +163,9 @@ private:
 //               (a2)<----------[ 1 sample ]
 //
 //
-class HalfBiquad :  public Filter {
+class HalfBiquad {
     public:
-    float process(float input) override {
+    float process(float input) {
       // y[n] = bX[n] - a1Y[n-1] - a2Y[n-2]
 
         //feedback = sample delayed by 4
@@ -208,7 +204,7 @@ private:
 };
 
 
-class Biquad :  public Filter {
+class Biquad {
 public:
     // Zoek een Biquad, en maak  'm :- )
     // Probeer het internet, of Will Pirkle, zijn verschillende benaderingen

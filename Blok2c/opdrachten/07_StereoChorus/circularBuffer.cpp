@@ -39,22 +39,25 @@ int CircularBuffer::getNumSamplesDelay() {return numSamplesDelay;}
 
 void CircularBuffer::setNumSamplesDelay(float numSamplesDelay) {
     if (numSamplesDelay < 0) {
-        throw "CircularBuffer::setNumSamplesDelay - numSamplesDelay exceeds range [0, inf]";
+        std::cout << "CircularBuffer::setNumSamplesDelay - numSamplesDelay exceeds range [0, inf]" << std::endl;
+    }else {
+        this-> numSamplesDelay = numSamplesDelay;
+        updateDelay();
     }
-    this-> numSamplesDelay = numSamplesDelay;
-    updateDelay();
 }
 
 
 
 void CircularBuffer::write(float sample) {
-    buffer[writeHead++] = sample;
-    wrap(writeHead);
+    buffer[writeHead] = sample;
+    wrap(++writeHead);
 }
 
 float CircularBuffer::read() {
+    const auto output = buffer[readHead];
+    readHead++;
     wrap(readHead);
-   return buffer[readHead++];
+    return output;
 }
 
 void CircularBuffer::updateDelay() {
@@ -65,5 +68,7 @@ void CircularBuffer::updateDelay() {
 
 
 void CircularBuffer::wrap(int &head) {
-    if(head >= bufferSize){head -= bufferSize;}
+    if(head >= bufferSize) {
+        head -= bufferSize;
+    }
 }

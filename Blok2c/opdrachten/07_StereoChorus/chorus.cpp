@@ -3,11 +3,12 @@
 //
 #include "chorus.h"
 #include "interpolation.h"
+#include "delayMath.h"
 
 Chorus::Chorus(float rate, float depth, float feedback){
 
   //Pirkle: chorus has a delay of 1-30ms, so 1440 maxDelay (for 48000 kHz)
-  circBuffer.setBufferSize(1440);
+  circBuffer.setBufferSize(DelayMath::msToSamples(60, 48000));
   sine.setFrequency(rate);
 
   this-> rate = rate;
@@ -15,25 +16,20 @@ Chorus::Chorus(float rate, float depth, float feedback){
   this-> feedback = feedback;
 }
 
-//TODO - look at Pirkle book
-
+//TODO - look at Pirkle book and prepare function
 void Chorus::applyEffect(const float &input, float &output) {
 
-  // modSignal = (sine.genNextSample() + 1) * 15;
-  circBuffer.setNumSamplesDelay(1400);
+  modSignal = DelayMath::msToSamples(10, 48000) + DelayMath::msToSamples((sine.genNextSample() * Interpolation::linMap(depth, 0, 5)), 48000);
 
+  circBuffer.setNumSamplesDelay((int)modSignal);
+  circBuffer.write(output * 0 + input);
   output = circBuffer.read();
-  // write value to circular buffer
-  circBuffer.write(output * feedback + input);
-  if (input != 0) {
-    std::cout << "haha" << std::endl;
-  }
 }
 
 Chorus::~Chorus(){
 }
 
-//FIXME - use catch or just return instead of throw
+
 //----- Setters -----
 void Chorus::setRate(float rate) {
   if (rate < 0.1 || rate > 20) {

@@ -4,7 +4,7 @@
 
 #pragma once
 
-class delayMath{
+class DelayMath{
 public:
 
   static float samplesToMs(int samples, int samplerate){

@@ -19,6 +19,7 @@ public:
   float getSample();
 
   void setDryWet(float dryWet);
+  void setBypass(bool bypassOn);
 
 protected:
   // pure virtual method
@@ -28,11 +29,9 @@ private:
   // balance between dry and wet signal
   float dryWet;
   float wetDry; // = 1 - dryWet
+  bool bypassOn = false;
   // cache last sample
   float m_sample = 0;
-  /*
-   * NOTE: other possible extra base class functionality:
-   * • bypass
-   */
+
 
 };

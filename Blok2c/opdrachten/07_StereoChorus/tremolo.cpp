@@ -3,9 +3,10 @@
 #include "sine.h"
 #include "square.h"
 #include <iostream>
+#include <triangle.h>
 
 Tremolo::Tremolo(float modFreq, float modDepth,
-      WaveformType waveformType, float samplerate) : Effect(), m_modDepth(modDepth)
+                 WaveformType waveformType, float samplerate) : Effect(), m_modDepth(modDepth)
 {
   // instantiate the oscillator, depending on the passed waveform type
   switch (waveformType) {
@@ -24,6 +25,11 @@ Tremolo::Tremolo(float modFreq, float modDepth,
     // TODO: alter calculation of to create a non-aliasing square,
     // similar to the calculation within the Saw class
     m_osc = new Square(modFreq, samplerate);
+    break;
+  }
+  case WaveformType::TRIANGLE:
+  {
+    m_osc = new Triangle(modFreq, samplerate);
     break;
   }
   default:

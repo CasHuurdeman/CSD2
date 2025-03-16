@@ -41,12 +41,12 @@ private:
 //
 class FIRFilter : public Filter {
     public:
-    void process(const float& input, float& output) {
+    float process(float input) {
         // Y[n] = X[n] - bX[n-1]
-        output = input - (b * x1);
+        float output = input - (b * x1);
 
         x1 = input; // Recaching Delay
-        // return output;
+        return output;
     }
 
     void setCoefficient(float coefficient) {

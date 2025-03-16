@@ -17,8 +17,11 @@ public:
     float givePulse(){
         if(count == 0){
             count++;
-          return 1.0f;}
-        else{count++;}
+            return 1.0f;}
+        else {
+            count++;
+            return 0.0f;
+        }
       };
 
 private:

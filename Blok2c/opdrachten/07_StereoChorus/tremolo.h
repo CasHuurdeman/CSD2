@@ -10,8 +10,10 @@ public:
     SINE = 0, // ensure enum starts at 0
     SAW,
     SQUARE,
-    SIZE // 3
+    TRIANGLE,
+    SIZE // 4
   };
+
   Tremolo(float modFreq = 10.0f, float modDepth = 1.0f,
     WaveformType waveformType = WaveformType::SINE, float samplerate = 44100);
   ~Tremolo();
