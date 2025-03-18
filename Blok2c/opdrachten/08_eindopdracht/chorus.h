@@ -13,7 +13,7 @@
 class Chorus : public Effect{
 public:
     Chorus() = default;
-    Chorus(float rate, float depth, float feedback, float phase);
+    Chorus(float rate, float depth, float feedback, float dryWet, float phase);
     ~Chorus();
 
     void applyEffect(const float &input, float &output) override;

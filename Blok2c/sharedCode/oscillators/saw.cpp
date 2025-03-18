@@ -8,15 +8,11 @@ Saw::Saw() : Saw(0, 0) {}
 Saw::Saw(float frequency, float samplerate) :
   Oscillator(frequency, samplerate),
   phaseIncrement(frequency / samplerate * SAW_SMOOTH_FACTOR),
-  smoothY(0)
-{
-  std::cout << "Saw - constructor\n";
+  smoothY(0){
 }
 
 
-Saw::~Saw()
-{
-  std::cout << "Saw - destructor\n";
+Saw::~Saw(){
 }
 
 //override calculate method

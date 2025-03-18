@@ -40,7 +40,7 @@ struct CustomCallback : AudioCallback {
     SimpleLadder filter;
 };
 
-#define Delta_Sequence 0
+#define Delta_Sequence 1
 
 int main() {
 

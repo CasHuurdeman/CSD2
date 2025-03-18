@@ -11,10 +11,9 @@
 //
 class IIRFilter {
     public:
-    float process(float input) {
+    double process(float input) {
         // Y[n] = X[n] + aY[n-1]
         feedback = input + (a * feedback);
-        std::cout << feedback << std::endl;
         return feedback;
     }
 
@@ -24,7 +23,7 @@ class IIRFilter {
     }
 
 private:
-    float feedback { 0.0 };
+    double feedback { 0.0 };
     float a { 0.0 }; // Coefficient "a" is mostly used for feedback lines
 
 };

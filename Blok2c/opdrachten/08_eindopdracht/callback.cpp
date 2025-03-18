@@ -7,6 +7,7 @@ void CustomCallback::prepare(int rate) {
     samplerate = (float) rate;
     std::cout << "\nsamplerate: " << samplerate << "\n";
     tremolo.prepare(rate);
+    delay.prepare(rate);
 
   //Only for stereo, so 2 channels
   for (int channel = 0u; channel < 2; channel++) {
@@ -26,12 +27,15 @@ void CustomCallback::process(AudioBuffer buffer) {
       //TODO - effect chain dynamisch met pointers naar verschillende effect objecten
 
       // tremolo.processFrame(inputChannels[channel][i],  outputChannels[channel][i]);
-      // delay.processFrame(sample1,  sample2);
+      delay.processFrame(inputChannels[channel][i],  outputChannels[channel][i]);
       // waveShaper.processFrame(sample2, sample1);
 
-
+      /*
+      chorus.processFrame(inputChannels[0][i], outputChannels[channel][i]);
       //inputChannels[0] because of a mono input (this could be variable if I wanted a stereo input)
       chori[channel].processFrame(inputChannels[0][i], outputChannels[channel][i]);
+
+      */
     }
   }
 }

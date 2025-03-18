@@ -5,13 +5,11 @@
 #include "interpolation.h"
 #include "delayMath.h"
 
-Chorus::Chorus(float rate, float depth, float feedback, float phase){
+Chorus::Chorus(float rate, float depth, float feedback, float dryWet, float phase){
 
-  //Pirkle: chorus has a delay of 1-30ms, so 1440 maxDelay (for 48000 kHz)
-  circBuffer.setBufferSize(DelayMath::msToSamples(60, 48000));
   osc.setFrequency(rate);
   osc.setPhase(phase);
-  setDryWet(0.7);
+  setDryWet(dryWet);
 
   this-> rate = rate;
   this-> depth = depth;
@@ -23,6 +21,8 @@ void Chorus::prepare(float samplerate) {
   osc.prepare(samplerate);
   this-> samplerate = samplerate;
 
+  //Pirkle: chorus has a delay of 1-30ms, so 1440 maxDelay (for 48000 kHz)
+  circBuffer.setBufferSize(DelayMath::msToSamples(60, samplerate));
 }
 
 
