@@ -7,15 +7,19 @@ void CustomCallback::prepare(int rate) {
     samplerate = (float) rate;
     std::cout << "\nsamplerate: " << samplerate << "\n";
     tremolo.prepare(rate);
-    // chorus.prepare(rate);
-    // chorus.setBypass(false);
+
+  //Only for stereo, so 2 channels
+  for (int channel = 0u; channel < 2; channel++) {
+    chori[channel].prepare(rate);
+    chori[channel].setBypass(false);
+  }
 }
 
 void CustomCallback::process(AudioBuffer buffer) {
   auto [inputChannels, outputChannels, numInputChannels, numOutputChannels, numFrames] = buffer;
   float sample1, sample2;
 
-  //TODO - Do I have to do this for left and right? --> so an inputL inputR and outputL outputR
+  //TODO - make an array with effects
   for (int channel = 0u; channel < numInputChannels; channel++) {
 
     for (int i = 0u; i < numFrames; i++) {
@@ -25,8 +29,9 @@ void CustomCallback::process(AudioBuffer buffer) {
       // delay.processFrame(sample1,  sample2);
       // waveShaper.processFrame(sample2, sample1);
 
-      //FIXME - not the good chorus
-      // chorus.processFrame(inputChannels[channel][i], outputChannels[channel][i]);
+
+      //inputChannels[0] because of a mono input (this could be variable if I wanted a stereo input)
+      chori[channel].processFrame(inputChannels[0][i], outputChannels[channel][i]);
     }
   }
 }

@@ -23,7 +23,8 @@ plt.yticks(np.arange(-1., 1., 1.0))
 ax.set(xlabel='sample', ylabel='output',
        title='Output data')
 ax.grid()
-ax.set_xscale('log')
+# ax.set_xscale('log')
+# ax.set_yscale('log')
 
 # To save the result, outcomment the line below:
 # fig.savefig("data_plot.png")

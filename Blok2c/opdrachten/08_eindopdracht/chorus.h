@@ -16,10 +16,7 @@ public:
     Chorus(float rate, float depth, float feedback, float phase);
     ~Chorus();
 
-    //
-    void applyEffect(const float &input, float &output) override {};
-
-    float applyEffect(float input);
+    void applyEffect(const float &input, float &output) override;
     void prepare(float samplerate) override;
 
     void setRate(float rate);
@@ -34,7 +31,7 @@ public:
 private:
     //TODO - make an osc pointer (if I have too much time)
     //TODO - check sound with triangle
-    Triangle osc;
+    Sine osc;
     CircularBuffer circBuffer;
 
     //rate = LFO freq

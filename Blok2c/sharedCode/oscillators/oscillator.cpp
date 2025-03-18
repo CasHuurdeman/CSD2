@@ -50,3 +50,11 @@ float Oscillator::getFrequency()
 {
   return frequency;
 }
+
+float Oscillator::getPhase() {
+  return phase;
+}
+
+void Oscillator::setPhase(float phase) {
+  this->phase = phase;
+}

@@ -27,16 +27,16 @@ void Chorus::prepare(float samplerate) {
 
 
 //TODO - look at Pirkle book
-float Chorus::applyEffect(float input) {
-  float output;
+void Chorus::applyEffect(const float &input, float &output) {
 
-  modSignal = DelayMath::msToSamples(10, samplerate) + DelayMath::msToSamples((osc.genNextSample() * Interpolation::linMap(depth, 0, 5)), samplerate);
+  float baseDelay = DelayMath::msToSamples(10, samplerate);
+  float modDelay = DelayMath::msToSamples((osc.genNextSample() * Interpolation::linMap(depth, 0, 5)), samplerate);
+
+  modSignal = baseDelay + modDelay;
 
   circBuffer.setNumSamplesDelay((int)modSignal);
-  circBuffer.write(output * 0 + input);
+  circBuffer.write(output * feedback + input);
   output = circBuffer.read();
-
-  return output;
 }
 
 

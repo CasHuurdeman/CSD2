@@ -37,10 +37,10 @@ struct CustomCallback : AudioCallback {
 
 
     Saw saw;
-    IIRFilter filter;
+    SimpleLadder filter;
 };
 
-#define Delta_Sequence 1
+#define Delta_Sequence 0
 
 int main() {
 

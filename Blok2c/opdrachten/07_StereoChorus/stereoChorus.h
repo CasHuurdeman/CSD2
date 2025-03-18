@@ -5,16 +5,22 @@
 
 #include "effect.h"
 #include "circularBuffer.h"
-#include "LFO.h"
+#include "chorus.h"
 
 class StereoChorus : public Effect{
 public:
-  StereoChorus(){};
-  ~StereoChorus(){};
+  StereoChorus(float rate, float depth, float feedback);
+  ~StereoChorus();
 
   void applyEffect(const float &input, float &output) override;
 
 private:
+  float rate;
+  float depth;
+  float feedback;
 
+  Chorus chorusL;
+  Chorus chorusC;
+  Chorus chorusR;
 
 };

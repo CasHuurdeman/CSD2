@@ -3,8 +3,7 @@ juce_add_console_app(07_StereoChorus PRODUCT_NAME "07_StereoChorus")
 target_sources(07_StereoChorus PRIVATE main.cpp callback.cpp
         effect.cpp circularBuffer.cpp
         delay.cpp waveShaper.cpp
-#        stereoChorus.cpp
-        chorus.cpp
+        stereoChorus.cpp chorus.cpp
         LFO.cpp tremolo.cpp )
 target_compile_definitions(07_StereoChorus PRIVATE JUCE_WEB_BROWSER=0 JUCE_USE_CURL=0 SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
 

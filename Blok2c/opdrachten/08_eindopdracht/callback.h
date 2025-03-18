@@ -18,6 +18,10 @@ private:
   Tremolo tremolo = Tremolo(6, 1);
   Delay delay;
   WaveShaper waveShaper = WaveShaper(4096);
-  // Chorus chorus = Chorus(1,1,0.9f, 0.0f);
 
+  // Chorus chorus = Chorus(1,0.5,0.0f, 0.0f);
+
+  //only 2 chori because stereo
+  std::array<Chorus, 2> chori{ Chorus(1,0.5,0.0f, 0.25f),
+                                Chorus(1,0.5,0.0f, 0.75f) };
 };

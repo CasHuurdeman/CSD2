@@ -19,6 +19,9 @@ public:
   void setFrequency(float frequency);
   float getFrequency();
 
+  float getPhase();
+  void setPhase(float phase);
+
 protected:
   virtual void calcNextSample() = 0;
   float frequency;

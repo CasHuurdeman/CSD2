@@ -1,6 +1,7 @@
 #include <iostream>
 #include "triangle.h"
 #include "sine.h"
+#include "saw.h"
 #include <audioToFile.h>
 #include "diracDelta.h"
 #include <complex>
@@ -15,12 +16,10 @@ int main() {
   float currentSample = 0.0f;
   float highestSample = 0.0f;
 
-  Sine osc{0};
+  Saw osc{0};
 
-  FIRFilter filter;
-  filter.setCoefficient(0.5f);
-  // filter.setA1Coefficient(0.5f);
-  // filter.setA2Coefficient(0.5f);
+  SimpleLadder filter;
+  filter.setCoefficient(0.9f);
 
 
   const std::string sourcePath = SOURCE_DIR;

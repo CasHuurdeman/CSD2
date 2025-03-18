@@ -21,10 +21,9 @@ int main() {
     //POWER:
     float feedback {0.0};
     for (int i = 0; i < bufferSize; i++) {
-        feedback = feedback + (buffer[i] * buffer[i]);
+        feedback += (buffer[i] * buffer[i]);
     }
 
-    // devided by bufferSize for RMS (root MEAN square)
      //--> RMS niet met absoluutstrepen
     std::cout << sqrt(feedback/bufferSize) << std::endl;
 

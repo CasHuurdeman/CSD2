@@ -39,7 +39,7 @@ class FIRFilter {
     public:
     float process(float input) {
         // Y[n] = X[n] - bX[n-1]
-        float output = b*input - (b * x1);
+        float output = a * input - (b * x1);
 
         x1 = input; // Recaching Delay
         return output;
@@ -47,12 +47,13 @@ class FIRFilter {
 
     void setCoefficient(float coefficient) {
         b = coefficient;
+        a = 1.0f - b;
     }
 
 private:
     float x1 {0.0 }; // x1 for a single sample delay
     float b { 0.0 };  // Coefficient "b" is usually used for feed forward lines
-
+    float a { 0.0 };
 };
 
 // MET SCALING
@@ -87,32 +88,28 @@ private:
 //   X[n]--->[OnePole][OnePole][OnePole][OnePole]--->Y[n]
 //
 class SimpleLadder {
-    public:
+public:
     SimpleLadder() {
-        for (int i = 0; i < 4; i++) {
-            OnePole onePole;
-            array[i] = onePole;
-            array[i].setCoefficient(0.9f);
-        }
     }
 
     float process(float input) {
-        for (int i = 0; i < 4; i++) {
-            input = array[i].process(input);
-        }
         feedback = input;
+        for (int i = 0; i < 4; i++) {
+            feedback = onePole[i].process(feedback);
+        }
         return feedback;
     }
 
     void setCoefficient(float coefficient) {
-        a = coefficient;
-        b = 1.0f - a;
+        for (int i = 0; i < 4; i++) {
+            onePole[i].setCoefficient(coefficient);
+        }
     }
 
 private:
     float feedback { 0.0 };
 
-    std::array<OnePole, 4> array;
+    OnePole onePole[4];
 
     float b { 0.0 };
     float a { 0.0 };
