@@ -13,13 +13,10 @@ int main() {
   int samplerate = 48000;
   int halfSamplerate = (int)(0.5f*samplerate);
 
-  double currentSample = 0.0f;
-  double highestSample = 0.0f;
-
   Sine osc{0};
-
-  IIRFilter filter;
-  filter.setCoefficient(0.5f);
+  osc.prepare(samplerate);
+  Biquad filter;
+  // filter.setCoefficient(0.5f);
 
 
   const std::string sourcePath = SOURCE_DIR;
@@ -27,17 +24,17 @@ int main() {
 
 
   for (int i = 0; i < halfSamplerate; i++) {
-    osc.setFrequency(i);
+    osc.setFrequency((float)i);
+    double highestSample = 0.0f;
 
-    for (int j = 0; j < halfSamplerate/(1+i); j++) {
-      currentSample = fabs(filter.process(osc.genNextSample()));
+    for (int j = 0; j < (100*(halfSamplerate/(1 + i))); j++) {
+      double currentSample = fabs(filter.process(osc.genNextSample()));
 
       if (currentSample > highestSample) {
         highestSample = currentSample;
       }
     }
     fileWriter.write(std::to_string(highestSample) + "\n");
-    highestSample = 0;
   }
 
   return 0;

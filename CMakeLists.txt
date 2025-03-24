@@ -3,4 +3,4 @@ project(CSD LANGUAGES CXX)
 
 add_subdirectory(JUCE)
 add_subdirectory(Blok2b)
-#add_subdirectory(Blok2c)
+add_subdirectory(Blok2c)

@@ -18,7 +18,7 @@ public:
     WaveformType waveformType = WaveformType::SINE, float samplerate = 44100);
   ~Tremolo();
 
-  void prepare(float samplerate) override;
+  void prepare(int samplerate) override;
   // override base class method
   // applies tremolo effect to the input frame
   void applyEffect(const float &input, float &output) override;

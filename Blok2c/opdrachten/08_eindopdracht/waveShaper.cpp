@@ -13,8 +13,9 @@ WaveShaper::WaveShaper(int bufferSize){
     }
 
     this->bufferSize = bufferSize;
-    billFuffer();
+    fillBuffer();
 }
+
 
 WaveShaper::~WaveShaper() {
     delete [] buffer;
@@ -33,17 +34,17 @@ void WaveShaper::applyEffect(const float &input, float &output){
 
 
 void WaveShaper::setK(float k) {
-    //-20 and 21 are chosen 'randomly'
-    //21 instead of 20 because it's funny
-    if (k < -20 || k > 21)
+
+    if (k < -20 || k > 20)
     this->k = k;
-    billFuffer();
+    fillBuffer();
 }
 
-//TODO - comments
-void WaveShaper::billFuffer() {
+//fill the buffer with the wavetable values
+//waveShaper from 'Designing Audio Effect Plugins in C++' -- William C Pirkle -- 2nd, 2019
+void WaveShaper::fillBuffer() {
     for (int i = 0; i < bufferSize; i++) {
         float input = (float)i/(0.5f * bufferSize) - 1.0f;
-        buffer[i] = (1/atan(k)) * atan(k * input); //TODO - bron (prikle)
+        buffer[i] = (1/atan(k)) * atan(k * input);
     }
 }

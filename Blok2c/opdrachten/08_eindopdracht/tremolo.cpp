@@ -5,6 +5,8 @@
 #include <iostream>
 #include <triangle.h>
 
+//Code from https://github.com/ciskavriezenga/CSD_24-25/
+
 Tremolo::Tremolo(float modFreq, float modDepth,
                  WaveformType waveformType, float samplerate) : Effect(), m_modDepth(modDepth)
 {
@@ -45,7 +47,7 @@ Tremolo::~Tremolo()
   m_osc = nullptr;
 }
 
-void Tremolo::prepare(float samplerate) {
+void Tremolo::prepare(int samplerate) {
   // NOTE: example, keeping things 'simple', hence no validation
   m_osc->prepare(samplerate);
 }

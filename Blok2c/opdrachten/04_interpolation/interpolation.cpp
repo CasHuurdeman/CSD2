@@ -23,11 +23,11 @@ float Interpolation::nnMap(float value, float low, float high){
 float Interpolation::linMap(float value, float low, float high){
     //check if value is withing valid range
     if(value < 0){
-        std::cout << "ERROR Interpolation::nnMap \n That's not between 0 and 1";
+        std::cout << "ERROR Interpolation::linMap \n That's not between 0 and 1 (<0)";
         return low;
     }
     if(value > 1){
-        std::cout << "ERROR Interpolation::nnMap \n That's not between 0 and 1";
+        std::cout << "ERROR Interpolation::linMap \n That's not between 0 and 1 (>1)";
         return high;
     }
     //at this point the value is within range

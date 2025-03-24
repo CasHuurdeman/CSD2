@@ -1,6 +1,7 @@
 #include "delay.h"
 #include <iostream>
 #include "delayMath.h"
+#include "interpolation.h"
 
 Delay::Delay(float feedback, float msDelay, float maxMsDelay, float dryWet){
 
@@ -11,9 +12,10 @@ Delay::Delay(float feedback, float msDelay, float maxMsDelay, float dryWet){
   this->maxMsDelay = maxMsDelay;
 }
 
-void Delay::prepare(float samplerate) {
-  //TODO - NOTE: example, keeping things 'simple', hence no validation (also in tremolo)
+void Delay::prepare(int samplerate) {
   this-> samplerate = samplerate;
+
+  RMS.prepare(samplerate);
 
   circBuffer.setBufferSize(DelayMath::msToSamples(maxMsDelay, samplerate));
   circBuffer.setNumSamplesDelay(DelayMath::msToSamples(msDelay, samplerate));
@@ -25,8 +27,18 @@ Delay::~Delay(){
 
 // override base class method
 // applies delay effect to the input frame and stores it to the output frame
-void Delay::applyEffect(const float &input, float &output)
-{
+void Delay::applyEffect(const float &input, float &output){
+
+  float RMSValue = RMS.calculateRMS(input);
+
+  //normally RMSValue is ~0.07
+  while (RMSValue > 0.1) {
+    RMSValue = RMSValue*0.5;
+  }
+
+  // setFeedback(Interpolation::mapInRange(RMS.calculateRMS(input), 0.025f, 0.1, 0.0f, 1.0f));
+  setFeedback(5 * RMS.calculateRMS(input));
+
   circBuffer.write(output * feedback + input);
   output = circBuffer.read();
 }
@@ -39,4 +51,12 @@ void Delay::setFeedback(float feedback)
     throw "Delay::setFeedback - feedback exceeds range [0, 1]";
   }
   this->feedback = feedback;
+}
+
+void Delay::setDelay(float msDelay) {
+  if(feedback < 0 || feedback > 10000) {
+    throw "Delay::setDelay - delay exceeds range [0, 10 000]";
+  }
+  this->msDelay = msDelay;
+  circBuffer.setNumSamplesDelay(DelayMath::msToSamples(msDelay, samplerate));
 }

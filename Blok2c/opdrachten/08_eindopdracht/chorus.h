@@ -8,6 +8,7 @@
 #include "effect.h"
 #include "circularBuffer.h"
 #include "delayMath.h"
+#include "RMS.h"
 
 //minDelay is not a user parameter
 class Chorus : public Effect{
@@ -17,7 +18,7 @@ public:
     ~Chorus();
 
     void applyEffect(const float &input, float &output) override;
-    void prepare(float samplerate) override;
+    void prepare(int samplerate) override;
 
     void setRate(float rate);
     void setDepth(float depth);
@@ -29,9 +30,10 @@ public:
 
 
 private:
-    //TODO - make an osc pointer (if I have too much time)
-    //TODO - check sound with triangle
-    Sine osc;
+    //TODO (optionally) - make an osc pointer
+
+    //sine is also nice (maybe even nicer)
+    Triangle osc;
     CircularBuffer circBuffer;
 
     //rate = LFO freq
@@ -39,6 +41,6 @@ private:
     //depth = LFO amp
     float depth;
     float feedback;
-    float modSignal = 0;
+    float modSignal;
     int samplerate;
 };

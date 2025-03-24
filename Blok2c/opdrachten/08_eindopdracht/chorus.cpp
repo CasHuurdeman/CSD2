@@ -11,15 +11,17 @@ Chorus::Chorus(float rate, float depth, float feedback, float dryWet, float phas
   osc.setPhase(phase);
   setDryWet(dryWet);
 
+  //rate and depth are not set here
   this-> rate = rate;
   this-> depth = depth;
   this-> feedback = feedback;
 }
 
-void Chorus::prepare(float samplerate) {
+void Chorus::prepare(int samplerate) {
   //TODO - NOTE: example, keeping things 'simple', hence no validation (also in tremolo)
-  osc.prepare(samplerate);
   this-> samplerate = samplerate;
+
+  osc.prepare(samplerate);
 
   //Pirkle: chorus has a delay of 1-30ms, so 1440 maxDelay (for 48000 kHz)
   circBuffer.setBufferSize(DelayMath::msToSamples(60, samplerate));
@@ -29,10 +31,12 @@ void Chorus::prepare(float samplerate) {
 //TODO - look at Pirkle book
 void Chorus::applyEffect(const float &input, float &output) {
 
-  float baseDelay = DelayMath::msToSamples(10, samplerate);
-  float modDelay = DelayMath::msToSamples((osc.genNextSample() * Interpolation::linMap(depth, 0, 5)), samplerate);
+  //Calculate the modSignal in samples with ms as input
+    float baseDelay = DelayMath::msToSamples(10, samplerate);
+    float modDelay = DelayMath::msToSamples((osc.genNextSample() * Interpolation::linMap(depth, 0, 5)), samplerate);
 
-  modSignal = baseDelay + modDelay;
+    modSignal = baseDelay + modDelay;
+
 
   circBuffer.setNumSamplesDelay((int)modSignal);
   circBuffer.write(output * feedback + input);
@@ -47,8 +51,9 @@ Chorus::~Chorus(){
 //----- Setters -----
 void Chorus::setRate(float rate) {
   if (rate < 0.1 || rate > 20) {
-    std::cout << "Chorus::setDepth - depth exceeds range [0.1, 20]\n";
-  }else {
+    std::cout << "Chorus::setRate - rate exceeds range [0.1, 20]\n" << rate << std::endl;;
+  }
+  else {
     this-> rate = rate;
     osc.setFrequency(rate);
   }
@@ -57,15 +62,18 @@ void Chorus::setRate(float rate) {
 void Chorus::setDepth(float depth) {
   if (depth < 0 || depth > 1) {
     std::cout << "Chorus::setDepth - depth exceeds range [0, 1]\n";
-  }else
-{  this-> depth = depth;}
+  }
+  else {
+    this-> depth = depth;
+  }
 }
 
 void Chorus::setFeedback(float feedback)
 {
   if(feedback < 0 || feedback > 1) {
-    std::cout << "Chorus::setFeedback - feedback exceeds range [0, 1\n";
-  }else {
+    std::cout << "Chorus::setFeedback - feedback exceeds range [0, 1]\n";
+  }
+  else {
     this-> feedback = feedback;
   }
 }

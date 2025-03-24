@@ -11,10 +11,10 @@
 
 int main(int argc, char **argv) {
   ScopedMessageThreadEnabler scopedMessageThreadEnabler;
-  CustomCallback audioSource{44100};
+  CustomCallback audioSource{41000};
 
   JUCEModule juceModule (audioSource);
-  juceModule.init (1, 1);
+  juceModule.init (1, 2);
 
 #if WRITE_TO_FILE
   const std::string sourcePath = SOURCE_DIR;

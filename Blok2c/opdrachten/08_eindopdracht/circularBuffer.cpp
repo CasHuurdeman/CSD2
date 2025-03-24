@@ -39,7 +39,7 @@ int CircularBuffer::getNumSamplesDelay() {return numSamplesDelay;}
 
 void CircularBuffer::setNumSamplesDelay(float numSamplesDelay) {
     if (numSamplesDelay < 0) {
-        std::cout << "CircularBuffer::setNumSamplesDelay - numSamplesDelay exceeds range [0, inf]" << std::endl;
+        std::cout << "CircularBuffer::setNumSamplesDelay - numSamplesDelay exceeds range [0, inf]"  << numSamplesDelay << std::endl;
     }else {
         this-> numSamplesDelay = numSamplesDelay;
         updateDelay();

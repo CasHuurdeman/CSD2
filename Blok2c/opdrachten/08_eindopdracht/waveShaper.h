@@ -4,7 +4,7 @@
 #pragma once
 
 #include "effect.h"
-#include "circularBuffer.h"
+#include "RMS.h"
 
 class WaveShaper : public Effect {
   public:
@@ -13,12 +13,11 @@ class WaveShaper : public Effect {
 
     void setK(float k);
     void applyEffect(const float &input, float &output) override;
-    //billFuffer = fillBuffer
-    void billFuffer();
+    void fillBuffer();
 
   private:
   //k is just a standard parameter value in mathematics
-  float k = 10.0f;
+  float k = 2.0f;
   float* buffer;
   int bufferSize;
 };

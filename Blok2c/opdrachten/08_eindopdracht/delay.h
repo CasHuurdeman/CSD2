@@ -1,6 +1,7 @@
 #pragma once
 #include "effect.h"
 #include "circularBuffer.h"
+#include "RMS.h"
 
 class Delay : public Effect
 {
@@ -10,18 +11,22 @@ public:
   ~Delay();
 
   void applyEffect(const float &input, float &output) override;
-  void prepare(float samplerate) override;
+  void prepare(int samplerate) override;
 
   void setFeedback(float feedback);
   float getFeedback();
+  void setDelay(float msDelay);
 
 
 private:
   CircularBuffer circBuffer;
 
-  float msDelay;
-  float maxMsDelay;
+  float msDelay = 0.0f;
+  float maxMsDelay = 0.0f;
 
-  float feedback;
-  int samplerate;
+  float feedback = 0.0f;
+  int samplerate = 48000;
+
+  // buffer of 3 seconds
+  RMS RMS{3000};
 };

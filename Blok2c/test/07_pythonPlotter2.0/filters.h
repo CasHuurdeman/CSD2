@@ -67,7 +67,7 @@ class OnePole {
         // Y[n] = bX[n] + aY[n-1]
         // You make this one:
 
-        feedback = b * input + a * feedback;
+        feedback = b * input - a * feedback;
         return feedback;
     }
 
@@ -132,7 +132,7 @@ class FourSample {
         delay.insert(delay.begin(), input);
         delay.pop_back();
 
-        output = b * input + a* feedback;
+        output = b * input - a* feedback;
         return output;
     }
 
@@ -170,7 +170,7 @@ class HalfBiquad {
         delay.insert(delay.begin(), input);
         delay.pop_back();
 
-        output = b * input + a1 * feedback1 + a2 * feedback2;
+        output = b * input - a1 * feedback1 - a2 * feedback2;
         return output;
 
 
@@ -194,16 +194,45 @@ private:
     float feedback1 {0.0};
     float feedback2 {0.0};
     float output {0.0};
-    float b;
-    float a1;
-    float a2;
+    float b = 1.0;
+    float a1 = 0.1;
+    float a2= 0.1;
 };
 
 
 class Biquad {
 public:
-    // Zoek een Biquad, en maak  'm :- )
-    // Probeer het internet, of Will Pirkle, zijn verschillende benaderingen
-    // Succes.
+    // y[n] = bX[n] - a1Y[n-1] - a2Y[n-2]
 
+// y[n]= b1 * X[n] + b2 * X[n-1] + b3 * X[n-2] - a1 * Y[n-1] - a2 * Y[n-2]}
+    float process(float input) {
+        // y[n] = bX[n] - a1Y[n-1] - a2Y[n-2]
+
+        //feedback = sample delayed by 4
+        feedback1 = delay.at(0);
+        feedback2 = delay.at(1);
+        delay.insert(delay.begin(), input);
+        delay.pop_back();
+
+        x2 = x1;
+        x1 = input;
+
+        output = b1 * input - a1 * feedback1 - a2 * feedback2 + b2 * x1 + b3 * x2;
+        return output;
+
+    }
+
+
+private:
+    std::vector<float> delay {0.0, 0.0};
+    float feedback1 {0.0};
+    float feedback2 {0.0};
+    float x1 = {0.0};
+    float x2 = {0.0};
+    float output {0.0};
+    float b1 = 0.1;
+    float b2 = 0.1;
+    float b3 = 1;
+    float a1 = 0.1;
+    float a2 = 0.5;
 };

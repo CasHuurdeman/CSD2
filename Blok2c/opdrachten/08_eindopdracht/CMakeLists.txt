@@ -4,7 +4,9 @@ target_sources(08_eindopdracht PRIVATE main.cpp callback.cpp
         effect.cpp circularBuffer.cpp
         delay.cpp waveShaper.cpp
         chorus.cpp
-        tremolo.cpp )
+        tremolo.cpp
+        RMS.cpp
+)
 target_compile_definitions(08_eindopdracht PRIVATE JUCE_WEB_BROWSER=0 JUCE_USE_CURL=0 SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
 
 target_link_libraries(08_eindopdracht PRIVATE

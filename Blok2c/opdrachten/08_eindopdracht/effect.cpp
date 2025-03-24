@@ -14,8 +14,6 @@ void Effect::processFrame(const float &input, float &output)
     applyEffect(input, output);
     output = input * wetDry + output * dryWet;
 
-    //TODO- does m_sample have to be in "else"?
-
     // cache output samples
     m_sample = output;
   }
