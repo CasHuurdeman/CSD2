@@ -1,0 +1,2 @@
+add_subdirectory(opdrachten)
+add_subdirectory(test)
