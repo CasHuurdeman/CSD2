@@ -8,16 +8,18 @@ Effect::Effect(double dryWet) {
 Effect::~Effect() {}
 
 // process frame
-void Effect::processFrame(const double &input, double &output)
+double Effect::processFrame(double input)
 {
+  double output;
   if (bypassOn == false) {
-    applyEffect(input, output);
-    output = input * wetDry + output * dryWet;
+    output = input * wetDry + applyEffect(input) * dryWet;
 
     // TODO - WHY?: cache output samples
     m_sample = output;
   }
   else{output = input;}
+
+  return output;
 }
 
 // returns the last outputted sample

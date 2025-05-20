@@ -14,6 +14,7 @@ public:
   void setNumSamplesDelay(int numSamplesDelay);
   int getNumSamplesDelay();
 
+  //updateDelay gets called in setNumSamplesDelay
   void updateDelay();
   void wrap(int &head);
 

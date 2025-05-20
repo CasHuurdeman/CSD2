@@ -4,10 +4,9 @@
 
 #pragma once
 
-#include "effect.h"
-#include "circularBuffer.h"
 #include <iostream>
 #include <vector>
+#include "circularBuffer.h"
 
 class CombFilter{
 public:
@@ -23,8 +22,10 @@ public:
   float get_g();
 
 private:
-  std::vector<double> x;
-  std::vector<double> y;
+
+  //TODO - circular buffer
+  CircularBuffer x;
+  CircularBuffer y;
 
   //D is the order of the combfilter, also the bufferSize (Pirkle p464)
   int D;

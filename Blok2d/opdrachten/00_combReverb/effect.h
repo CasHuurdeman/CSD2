@@ -14,7 +14,7 @@ public:
   // not pure virtual, since not all subclasses require the samplerate
   virtual void prepare(double samplerate) { }
   // process frame
-  void processFrame(const double &input, double &output);
+  double processFrame(double input);
   // returns the last outputted sample
   double getSample();
 
@@ -22,7 +22,7 @@ public:
 
 protected:
   // pure virtual method
-  virtual void applyEffect(const double &input, double &output) = 0;
+  virtual double applyEffect(double input) = 0;
 
 private:
   // balance between dry and wet signal
@@ -30,6 +30,6 @@ private:
   float wetDry; // = 1 - dryWet
   // cache last sample
   double m_sample;
-  bool bypassOn = 0;
+  bool bypassOn = false;
 
 };

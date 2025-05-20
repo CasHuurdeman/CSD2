@@ -14,11 +14,11 @@ public:
 
   double process(double input);
 
-  // void setD(unsigned int D);
-  // unsigned int getD();
-  // //snakecase because g should be lower case
-  // void set_g(float g);
-  // float get_g();
+  void setD(unsigned int D);
+  unsigned int getD();
+  //snakecase because g should be lower case
+  void set_g(float g);
+  float get_g();
 
 private:
   std::vector<double> x;
