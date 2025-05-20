@@ -11,6 +11,13 @@ CombFilter::CombFilter(unsigned int D, float g){
   this->D = D;
   this->g = g;
 
+  x.setBufferSize(D);
+  y.setBufferSize(D);
+
+  x.setNumSamplesDelay(D);
+  y.setNumSamplesDelay(D);
+
+
 }
 
 CombFilter::~CombFilter(){
@@ -23,10 +30,11 @@ double CombFilter::process(double input) {
  // y(n) = x(n-D) + gy(n-D)
  // y(n) --> y[0]
 
-  x.insert(x.begin(), input);
-  x.pop_back();
+  x.write(input);
 
-  double output = x[D] + g*y[D];
+  double output = x.read() + g*y.read();
+
+  y.write(output);
 
   return output;
 }
@@ -35,14 +43,11 @@ double CombFilter::process(double input) {
 void CombFilter::setD(unsigned int D) {
   this->D = D;
 
-  //clear the vectors before filling them again with zero's
-  x.clear();
-  y.clear();
+  x.setBufferSize(D);
+  y.setBufferSize(D);
 
-  for(int i = 0; i <= D; i++) {
-    y.insert(y.begin(), 0);
-    x.insert(x.begin(), 0);
-  }
+  x.setNumSamplesDelay(D);
+  y.setNumSamplesDelay(D);
 
 }
 

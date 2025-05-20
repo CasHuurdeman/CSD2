@@ -23,7 +23,6 @@ public:
 
 private:
 
-  //TODO - circular buffer
   CircularBuffer x;
   CircularBuffer y;
 

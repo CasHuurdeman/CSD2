@@ -1,7 +1,7 @@
 project(00_combReverb VERSION 0.0.1)
 juce_add_console_app(00_combReverb PRODUCT_NAME "00_combReverb")
 target_sources(00_combReverb PRIVATE main.cpp callback.cpp
-        effect.cpp
+        effect.cpp circularBuffer.cpp
         combFilter.cpp
         combReverb.cpp
 )
