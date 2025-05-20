@@ -2,6 +2,8 @@
 #define CALLBACK_H
 
 #include <audiocomponent.h>
+#include "combReverb.h"
+#include "circularBuffer.h"
 
 
 class CustomCallback : public AudioCallback {
@@ -13,6 +15,8 @@ public:
 private:
   double samplerate = 44100;
 
+  //TODO - change delay time
+  CombReverb reverb{0.0f};
 
 };
 

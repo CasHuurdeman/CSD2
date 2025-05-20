@@ -27,3 +27,6 @@ void CombReverb::change_g(float &gCurrent, float gNew) {
     gCurrent = gNew;
 }
 
+void CombReverb::prepare(unsigned int samplerate) {
+    this->samplerate = samplerate;
+}

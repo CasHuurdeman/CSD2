@@ -7,7 +7,7 @@
 
 #pragma once
 
-class CombReverb : Effect{
+class CombReverb : public Effect{
 public:
   CombReverb(float DelayTime);
   ~CombReverb();
@@ -17,6 +17,8 @@ public:
   //snake case because g should not be a capital letter
   //TODO - Does this work?
   void change_g(float &gCurrent, float gNew);
+
+  void prepare(unsigned int samplerate);
 
 private:
   //TODO - Use array
@@ -31,4 +33,5 @@ private:
   CombFilter CF3{3, g3};
   CombFilter CF4{4, g4};
 
+  unsigned int samplerate;
 };

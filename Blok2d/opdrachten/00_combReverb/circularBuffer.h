@@ -21,8 +21,6 @@ public:
   double read();
   void write(double sample);
 
-
-
 private:
   double* buffer= nullptr;
   int bufferSize;

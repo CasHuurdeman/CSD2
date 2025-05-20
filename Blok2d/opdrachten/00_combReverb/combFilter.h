@@ -31,5 +31,4 @@ private:
   //g is the feedback value (Pirkle p464)
   float g;
 
-
 };

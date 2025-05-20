@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
   CustomCallback audioSource{44100};
 
   JUCEModule juceModule (audioSource);
-  juceModule.init (1, 2);
+  juceModule.init (1, 1);
 
 #if WRITE_TO_FILE
   const std::string sourcePath = SOURCE_DIR;
