@@ -10,6 +10,7 @@
 
 class CombFilter{
 public:
+  CombFilter() = default;
   CombFilter(unsigned int D, float g);
   ~CombFilter();
 
@@ -17,7 +18,7 @@ public:
 
   void setD(unsigned int D);
   unsigned int getD();
-  //snakecase because g should be lower case
+  //snakecase because g should be lowercase
   void set_g(float g);
   float get_g();
 
@@ -26,8 +27,8 @@ private:
   CircularBuffer x;
   CircularBuffer y;
 
-  //D is the order of the combfilter, also the bufferSize (Pirkle p464)
-  int D;
+  //D is the delay in the combfilter, also the bufferSize (Pirkle p464)
+  unsigned int D;
   //g is the feedback value (Pirkle p464)
   float g;
 

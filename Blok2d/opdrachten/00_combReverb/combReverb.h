@@ -4,6 +4,8 @@
 
 #include "effect.h"
 #include "combFilter.h"
+#include <array>
+#include "delayMath.h"
 
 #pragma once
 
@@ -15,23 +17,23 @@ public:
   double applyEffect(double input) override;
 
   //snake case because g should not be a capital letter
-  //TODO - Does this work?
+  //TODO - Does this work? --> this is not the way to change it
   void change_g(float &gCurrent, float gNew);
+
 
   void prepare(unsigned int samplerate);
 
 private:
-  //TODO - Use array
-  float g1 = 0.89f;
-  float g2 = 0.89f;
-  float g3 = 0.89f;
-  float g4 = 0.89f;
+    std::array<float, 4> g = {0.89f, 0.89f, 0.89f, 0.89f};
+    std::array<unsigned int, 4> D = {1,2,3,4};
 
-  //TODO - Use array
-  CombFilter CF1{1, g1};
-  CombFilter CF2{2, g2};
-  CombFilter CF3{3, g3};
-  CombFilter CF4{4, g4};
+  //TODO - Use array --> less readable
+ // std::array<CombFilter, 4> CF = {CombFilter{1, g[0]}}
+
+  CombFilter CF1;
+  CombFilter CF2;
+  CombFilter CF3;
+  CombFilter CF4;
 
   unsigned int samplerate;
 };
