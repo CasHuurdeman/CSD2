@@ -3,14 +3,16 @@
 //
 #include "circularBuffer.h"
 #include <iostream>
+#include "interpolation.h"
 
-CircularBuffer::CircularBuffer(unsigned int bufferSize, int numSamplesDelay) {
+CircularBuffer::CircularBuffer(unsigned int bufferSize, double numSamplesDelay) {
    //Allocating buffer
     buffer = new double[bufferSize];
     for (int i = 0; i < bufferSize; i++) {
         buffer[i] = 0;
     }
     this->numSamplesDelay = numSamplesDelay;
+    sampleOffset = numSamplesDelay - this->numSamplesDelay;
 }
 
 CircularBuffer::~CircularBuffer(){
@@ -37,16 +39,17 @@ void CircularBuffer::setBufferSize(int bufferSize){
 
 int CircularBuffer::getBufferSize(){return bufferSize;}
 
-int CircularBuffer::getNumSamplesDelay() {return numSamplesDelay;}
+double CircularBuffer::getNumSamplesDelay() {return numSamplesDelay;}
 
 
-void CircularBuffer::setNumSamplesDelay(int numSamplesDelay) {
+void CircularBuffer::setNumSamplesDelay(double numSamplesDelay) {
     if (numSamplesDelay < 0) {
         std::cout << "CircularBuffer::setNumSamplesDelay - numSamplesDelay exceeds range [0, inf]"
                 << numSamplesDelay << std::endl;
     }
     else {
-        this-> numSamplesDelay = numSamplesDelay;
+        this->numSamplesDelay = floor(numSamplesDelay);
+        sampleOffset = numSamplesDelay - this->numSamplesDelay;
         updateDelay();
     }
 }
@@ -58,9 +61,23 @@ void CircularBuffer::write(double sample) {
     wrap(++writeHead);
 }
 
-double CircularBuffer::read() {
+double CircularBuffer::readBetweenSamples() {
   //read the value, put in output , then increment the readHead
-    const double output = buffer[readHead];
+    double sample = buffer[readHead];
+    readHead++;
+    double nextSample = buffer[readHead];
+
+    //TODO - does this work? -- numSamplesDelay is now double and sampleOffset is calculated with that
+    //FIXME - interpolation with all-pass will make it not-allpass
+    //Interpolating between sample and nextSample
+    double output = Interpolation::linMap(sampleOffset, sample, nextSample);
+
+    wrap(readHead);
+    return output;
+}
+
+double CircularBuffer::read() {
+    double output = buffer[readHead];
     readHead++;
     wrap(readHead);
     return output;

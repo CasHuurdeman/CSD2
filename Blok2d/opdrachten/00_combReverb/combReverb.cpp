@@ -4,26 +4,39 @@
 
 #include <iostream>
 #include "combReverb.h"
+#include "delayMath.h"
 
-CombReverb::CombReverb(float DelayTime) {
-    //TODO - D and g shouldn't be in this class, but only in combFilter
+CombReverb::CombReverb() {
     std::cout << "CombReverb - constructor" << std::endl;
 
-}
-
-void CombReverb::prepare(unsigned int samplerate) {
-    this->samplerate = samplerate;
-
-    //TODO - D and g should be computed, set but not be saved in this class
-    CF1 = CombFilter {D[0], g[0]};
-    CF2 = CombFilter {D[1], g[1]};
-    CF3 = CombFilter {D[2], g[2]};
-    CF4 = CombFilter {D[3], g[3]};
 }
 
 CombReverb::~CombReverb() {
     std::cout << "CombReverb - destructor" << std::endl;
 }
+
+void CombReverb::prepare(unsigned int samplerate) {
+    this->samplerate = samplerate;
+
+    //TODO (later) - D and g should be computed, set but not be saved in this class
+    // now using static D values from Pirkle (p466)
+
+    std::cout << DelayMath::msToSamples(16.0f, samplerate) << std::endl;
+    std::cout << DelayMath::msToSamples(6.5f, samplerate) << std::endl;
+    std::cout << DelayMath::msToSamples(3.0f, samplerate) << std::endl;
+    std::cout << DelayMath::msToSamples(1.7f, samplerate) << std::endl;
+
+    // CF1 = CombFilter {DelayMath::msToSamples(16.0f, samplerate), 0.86f};
+    // CF2 = CombFilter {DelayMath::msToSamples(6.5f, samplerate), 0.86f};
+    // CF3 = CombFilter {DelayMath::msToSamples(3.0f, samplerate), 0.86f};
+    // CF4 = CombFilter {DelayMath::msToSamples(1.7f, samplerate), 0.86f};
+
+    CF1 = CombFilter(1,0.86f);
+    CF2 = CombFilter(2,0.86f);
+    CF3 = CombFilter(3,0.86f);
+    CF4 = CombFilter(4,0.86f);
+}
+
 
 double CombReverb::applyEffect(double input) {
 
@@ -34,7 +47,4 @@ double CombReverb::applyEffect(double input) {
     return output;
 }
 
-void CombReverb::change_g(float &gCurrent, float gNew) {
-    gCurrent = gNew;
-}
 

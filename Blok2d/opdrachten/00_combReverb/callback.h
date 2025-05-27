@@ -16,7 +16,7 @@ private:
   double samplerate = 44100;
 
   //TODO - change delay time
-  CombReverb reverb{0.0f};
+  CombReverb reverb;
 
 };
 

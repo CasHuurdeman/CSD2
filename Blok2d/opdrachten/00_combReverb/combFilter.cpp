@@ -5,18 +5,18 @@
 #include "combFilter.h"
 #include <iostream>
 
-CombFilter::CombFilter(unsigned int D, float g){
+CombFilter::CombFilter(float D, float g){
   std::cout << "CombFilter - constructor" << std::endl;
 
   this->D = D;
   this->g = g;
 
-  x.setBufferSize(D);
-  y.setBufferSize(D);
+  //Using ceil() because input has to be an int and >= D
+  x.setBufferSize(static_cast<int>(ceil(D)));
+  y.setBufferSize(static_cast<int>(ceil(D)));
 
   x.setNumSamplesDelay(D);
   y.setNumSamplesDelay(D);
-
 
 }
 
@@ -24,34 +24,36 @@ CombFilter::~CombFilter(){
   std::cout << "CombFilter - destructor" << std::endl;
 }
 
-//TODO - is this code good?
-//TODO - delay in samples or ms?
+
 double CombFilter::process(double input) {
  // y(n) = x(n-D) + gy(n-D)
  // y(n) --> y[0]
 
-  x.write(input);
+  //TODO - use prints to check if the buffers work
 
-  double output = x.read() + g*y.read();
+  //TODO (later) - This delay is possible with only one delay line
+  //Circular Buffer has a 'read' and 'readBetweenSamples' because interpolation
+  // will give an unwanted LPF effect for the APF later
+  double output = x.readBetweenSamples() + g*y.readBetweenSamples();
+  x.write(input);
 
   y.write(output);
 
   return output;
 }
 
-//TODO - use prints to check if the vectors work
-void CombFilter::setD(unsigned int D) {
+void CombFilter::setD(float D) {
   this->D = D;
 
-  x.setBufferSize(D);
-  y.setBufferSize(D);
+  x.setBufferSize(static_cast<int>(ceil(D)));
+  y.setBufferSize(static_cast<int>(ceil(D)));
 
   x.setNumSamplesDelay(D);
   y.setNumSamplesDelay(D);
 
 }
 
-unsigned int CombFilter::getD(){return D;}
+float CombFilter::getD(){return D;}
 
 void CombFilter::set_g(float g) {
   this->g = g;

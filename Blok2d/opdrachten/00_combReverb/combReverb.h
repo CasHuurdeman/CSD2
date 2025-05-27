@@ -11,22 +11,20 @@
 
 class CombReverb : public Effect{
 public:
-  CombReverb(float DelayTime);
+  //TODO - later: RT60, Echo density, Modal density, then an array with N combfilters
+  CombReverb();
   ~CombReverb();
-
-  double applyEffect(double input) override;
-
-  //snake case because g should not be a capital letter
-  //TODO - Does this work? --> this is not the way to change it
-  void change_g(float &gCurrent, float gNew);
-
 
   void prepare(unsigned int samplerate);
 
-private:
-    std::array<float, 4> g = {0.89f, 0.89f, 0.89f, 0.89f};
-    std::array<unsigned int, 4> D = {1,2,3,4};
+  double applyEffect(double input) override;
 
+    //TODO (later) - make calculateD and calculate_g
+  float calculateD();
+  float calculate_g();
+
+
+private:
   //TODO - Use array --> less readable
  // std::array<CombFilter, 4> CF = {CombFilter{1, g[0]}}
 

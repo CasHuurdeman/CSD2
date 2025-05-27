@@ -1,2 +1,3 @@
 #add_subdirectory(00_queue)
 add_subdirectory(01_pythonPlotter2d)
+add_subdirectory(02_floatErrorCheck)
