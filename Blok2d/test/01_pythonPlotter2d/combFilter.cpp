@@ -5,59 +5,55 @@
 #include "combFilter.h"
 #include <iostream>
 
-CombFilter::CombFilter(unsigned int D, float g){
+CombFilter::CombFilter(float D, float g){
   std::cout << "CombFilter - constructor" << std::endl;
 
   this->D = D;
   this->g = g;
 
-  for(int i = 0; i <= D; i++) {
-    y.insert(y.begin(), 0);
-    x.insert(x.begin(), 0);
-  }
+  //Using ceil() because input has to be an int and >= D
+  x.setBufferSize(static_cast<int>(ceil(D)) + 1);
+  y.setBufferSize(static_cast<int>(ceil(D)) + 1);
 
-  for (int i = 0; i < D; i++) {
-    std::cout << x[i] << std::endl;
-  }
+  x.setNumSamplesDelay(D);
+  y.setNumSamplesDelay(D);
+
 }
 
 CombFilter::~CombFilter(){
   std::cout << "CombFilter - destructor" << std::endl;
 }
 
-//TODO - is this code good?
-//TODO - delay in samples or ms?
+
 double CombFilter::process(double input) {
  // y(n) = x(n-D) + gy(n-D)
  // y(n) --> y[0]
+  x.write(input);
 
-  x.insert(x.begin(), input);
-  x.pop_back();
+  //TODO - use prints to check if the buffers work
 
-  double output = x[D] + g*y[D];
+  //TODO (later) - This delay is possible with only one delay line
+  //Circular Buffer has a 'read' and 'readBetweenSamples' because interpolation
+  // will give an unwanted LPF effect for the APF later
+  double output = x.read() + g*y.read();
 
-  y.insert(y.begin(), output);
-  y.pop_back();
+  y.write(output);
 
   return output;
 }
 
-//TODO - use prints to check if the vectors work
-void CombFilter::setD(unsigned int D) {
+void CombFilter::setD(float D) {
   this->D = D;
 
-  //clear the vectors before filling them again with zero's
-  x.clear();
-  y.clear();
+  x.setBufferSize(static_cast<int>(ceil(D)) + 1);
+  y.setBufferSize(static_cast<int>(ceil(D)) + 1);
 
-  for(int i = 0; i <= D; i++) {
-    y.insert(y.begin(), 0);
-    x.insert(x.begin(), 0);
-  }
+  x.setNumSamplesDelay(D);
+  y.setNumSamplesDelay(D);
 
 }
 
-unsigned int CombFilter::getD(){return D;}
+float CombFilter::getD(){return D;}
 
 void CombFilter::set_g(float g) {
   this->g = g;

@@ -21,8 +21,8 @@ public:
   float get_g();
 
 private:
-  CircularBuffer x;
-  CircularBuffer y;
+  CircularBuffer* x;
+  CircularBuffer* y;
 
   //D is the delay in the combfilter, also the bufferSize (Pirkle p464)
   float D;

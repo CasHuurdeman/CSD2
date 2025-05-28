@@ -16,7 +16,7 @@ int main() {
   Sine osc{0};
   osc.prepare(samplerate);
 
-  CombFilter filter = CombFilter(10, 0.9f);
+  CombFilter filter = CombFilter(768, 0.9f);
 
 
   const std::string sourcePath = SOURCE_DIR;

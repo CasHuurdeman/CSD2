@@ -6,6 +6,7 @@
 #include "combFilter.h"
 #include <array>
 #include "delayMath.h"
+#include "sine.h"
 
 #pragma once
 
@@ -32,6 +33,8 @@ private:
   CombFilter CF2;
   CombFilter CF3;
   CombFilter CF4;
+
+  Sine sine{1000};
 
   unsigned int samplerate;
 };

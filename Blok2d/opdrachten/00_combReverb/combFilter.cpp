@@ -11,13 +11,13 @@ CombFilter::CombFilter(float D, float g){
   this->D = D;
   this->g = g;
 
+  //TODO - is +1 nodig?
   //Using ceil() because input has to be an int and >= D
-  x.setBufferSize(static_cast<int>(ceil(D)));
-  y.setBufferSize(static_cast<int>(ceil(D)));
+  x = new CircularBuffer{static_cast<unsigned int>(ceil(D)) + 1, D};
+  y = new CircularBuffer{static_cast<unsigned int>(ceil(D)) + 1, D};
 
-  x.setNumSamplesDelay(D);
-  y.setNumSamplesDelay(D);
-
+  std::cout << x->getBufferSize() << std::endl;
+  std::cout << y->getBufferSize() << std::endl;
 }
 
 CombFilter::~CombFilter(){
@@ -28,16 +28,14 @@ CombFilter::~CombFilter(){
 double CombFilter::process(double input) {
  // y(n) = x(n-D) + gy(n-D)
  // y(n) --> y[0]
-
-  //TODO - use prints to check if the buffers work
+  x->write(input);
 
   //TODO (later) - This delay is possible with only one delay line
   //Circular Buffer has a 'read' and 'readBetweenSamples' because interpolation
   // will give an unwanted LPF effect for the APF later
-  double output = x.readBetweenSamples() + g*y.readBetweenSamples();
-  x.write(input);
+  double output = x->read() + g*y->read();
 
-  y.write(output);
+  y->write(output);
 
   return output;
 }
@@ -45,11 +43,14 @@ double CombFilter::process(double input) {
 void CombFilter::setD(float D) {
   this->D = D;
 
-  x.setBufferSize(static_cast<int>(ceil(D)));
-  y.setBufferSize(static_cast<int>(ceil(D)));
+  x->setBufferSize(static_cast<int>(ceil(D)) + 1);
+  y->setBufferSize(static_cast<int>(ceil(D)) + 1);
+  std::cout << x->getBufferSize() << std::endl;
+  std::cout << y->getBufferSize() << std::endl;
 
-  x.setNumSamplesDelay(D);
-  y.setNumSamplesDelay(D);
+
+  x->setNumSamplesDelay(D);
+  y->setNumSamplesDelay(D);
 
 }
 

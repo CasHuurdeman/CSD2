@@ -4,30 +4,29 @@
 
 #pragma once
 
-#include <iostream>
-#include <vector>
+#include "circularBuffer.h"
 
 class CombFilter{
 public:
-  CombFilter(unsigned int D, float g);
+  CombFilter() = default;
+  CombFilter(float D, float g);
   ~CombFilter();
 
   double process(double input);
 
-  void setD(unsigned int D);
-  unsigned int getD();
-  //snakecase because g should be lower case
+  void setD(float D);
+  float getD();
+  //snakecase because g should be lowercase
   void set_g(float g);
   float get_g();
 
 private:
-  std::vector<double> x;
-  std::vector<double> y;
+  CircularBuffer x;
+  CircularBuffer y;
 
-  //D is the order of the combfilter, also the bufferSize (Pirkle p464)
-  int D;
+  //D is the delay in the combfilter, also the bufferSize (Pirkle p464)
+  float D;
   //g is the feedback value (Pirkle p464)
   float g;
-
 
 };
