@@ -29,12 +29,10 @@ private:
   //TODO - Use array --> less readable
  // std::array<CombFilter, 4> CF = {CombFilter{1, g[0]}}
 
-  CombFilter CF1;
-  CombFilter CF2;
-  CombFilter CF3;
-  CombFilter CF4;
-
-  Sine sine{1000};
+  CombFilter* CF1;
+  CombFilter* CF2;
+  CombFilter* CF3;
+  CombFilter* CF4;
 
   unsigned int samplerate;
 };

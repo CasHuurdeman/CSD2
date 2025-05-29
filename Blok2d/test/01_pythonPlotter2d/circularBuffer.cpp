@@ -6,6 +6,8 @@
 #include "interpolation.h"
 
 CircularBuffer::CircularBuffer(unsigned int bufferSize, double numSamplesDelay) {
+    this->bufferSize = bufferSize;
+
    //Allocating buffer
     buffer = new double[bufferSize];
     for (int i = 0; i < bufferSize; i++) {
@@ -61,6 +63,7 @@ void CircularBuffer::write(double sample) {
     wrap(++writeHead);
 }
 
+//FIXME - this doesnt work
 double CircularBuffer::readBetweenSamples() {
   //read the value, put in output , then increment the readHead
     double sample = buffer[readHead];
@@ -69,7 +72,6 @@ double CircularBuffer::readBetweenSamples() {
     double nextSample = buffer[readHead];
 
     //TODO - does this work? -- numSamplesDelay is now double and sampleOffset is calculated with that
-    //FIXME - interpolation with all-pass will make it not-allpass
     //Interpolating between sample and nextSample
     double output = Interpolation::linMap(sampleOffset, sample, nextSample);
 

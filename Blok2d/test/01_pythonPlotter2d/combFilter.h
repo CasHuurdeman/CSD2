@@ -1,32 +1,17 @@
 //
-// Created by cashu on 13/05/2025.
+// Created by cashu on 29/05/2025.
 //
 
 #pragma once
 
-#include "circularBuffer.h"
+#include "filter.h"
 
-class CombFilter{
+class CombFilter : public Filter{
 public:
-  CombFilter() = default;
-  CombFilter(float D, float g);
-  ~CombFilter();
+    // APF() = default;
+    CombFilter(float D, float g);
+    ~CombFilter() override;
 
-  double process(double input);
-
-  void setD(float D);
-  float getD();
-  //snakecase because g should be lowercase
-  void set_g(float g);
-  float get_g();
-
-private:
-  CircularBuffer x;
-  CircularBuffer y;
-
-  //D is the delay in the combfilter, also the bufferSize (Pirkle p464)
-  float D;
-  //g is the feedback value (Pirkle p464)
-  float g;
+    double process(double input) override;
 
 };

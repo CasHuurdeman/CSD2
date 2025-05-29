@@ -5,6 +5,8 @@
 #include <audioToFile.h>
 #include "diracDelta.h"
 #include <complex>
+#include "all-passFilter.h"
+#include "filter.h"
 #include "combFilter.h"
 
 
@@ -16,7 +18,7 @@ int main() {
   Sine osc{0};
   osc.prepare(samplerate);
 
-  CombFilter filter = CombFilter(768, 0.9f);
+  APF filter{10, 0.09f};
 
 
   const std::string sourcePath = SOURCE_DIR;

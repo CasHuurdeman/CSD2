@@ -13,11 +13,10 @@ CombFilter::CombFilter(float D, float g){
 
   //TODO - is +1 nodig?
   //Using ceil() because input has to be an int and >= D
+  //+1 for a case of float errors (just to be sure)
   x = new CircularBuffer{static_cast<unsigned int>(ceil(D)) + 1, D};
   y = new CircularBuffer{static_cast<unsigned int>(ceil(D)) + 1, D};
 
-  std::cout << x->getBufferSize() << std::endl;
-  std::cout << y->getBufferSize() << std::endl;
 }
 
 CombFilter::~CombFilter(){
@@ -43,11 +42,9 @@ double CombFilter::process(double input) {
 void CombFilter::setD(float D) {
   this->D = D;
 
+  //+1 for a case of float errors (just to be sure)
   x->setBufferSize(static_cast<int>(ceil(D)) + 1);
   y->setBufferSize(static_cast<int>(ceil(D)) + 1);
-  std::cout << x->getBufferSize() << std::endl;
-  std::cout << y->getBufferSize() << std::endl;
-
 
   x->setNumSamplesDelay(D);
   y->setNumSamplesDelay(D);
