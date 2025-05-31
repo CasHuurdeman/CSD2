@@ -1,2 +1,3 @@
 add_subdirectory(00_combReverb)
 add_subdirectory(01_CircBufferCheck)
+add_subdirectory(02_schroedersReverb)

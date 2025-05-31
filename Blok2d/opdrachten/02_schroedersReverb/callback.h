@@ -16,7 +16,7 @@ private:
   double samplerate = 44100;
 
   //TODO - change delay time
-  std::array<CombReverb,2> stereoVerb {CombReverb(), CombReverb()};
+  CombReverb reverb;
 
 };
 

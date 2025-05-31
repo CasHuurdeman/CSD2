@@ -17,7 +17,7 @@ APF::~APF() {
 double APF::process(double input) {
   x->write(input);
 
-  //TODO (later) - This delay is possible with only one delay line --> make a separate x(n)= (or w(n)=) and y(n)= ???
+  //TODO (later) - This delay is possible with only one delay line
   //Circular Buffer has a 'read' and 'readBetweenSamples' because interpolation
   // will give an unwanted LPF effect for the APF
   double output = g*input + x->read() - g*y->read();
