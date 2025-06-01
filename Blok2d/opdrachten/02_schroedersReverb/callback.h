@@ -2,7 +2,7 @@
 #define CALLBACK_H
 
 #include <audiocomponent.h>
-#include "combReverb.h"
+#include "SchroedersReverb.h"
 #include "circularBuffer.h"
 
 
@@ -16,7 +16,7 @@ private:
   double samplerate = 44100;
 
   //TODO - change delay time
-  CombReverb reverb;
+  std::array<SchroedersReverb,2> stereoVerb {SchroedersReverb(), SchroedersReverb()};
 
 };
 

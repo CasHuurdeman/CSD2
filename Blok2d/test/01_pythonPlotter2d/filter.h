@@ -20,6 +20,8 @@ public:
     float get_g();
 
 protected:
+    //TODO - rethink this class, not every filter needs 2 circbuffers and some may need more
+    //TODO - make N buffers in constructor?
     CircularBuffer* x;
     CircularBuffer* y;
 

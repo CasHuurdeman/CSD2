@@ -8,6 +8,7 @@
 #include "all-passFilter.h"
 #include "filter.h"
 #include "combFilter.h"
+#include "low-passFilter.h"
 
 
 int main() {
@@ -18,7 +19,7 @@ int main() {
   Sine osc{0};
   osc.prepare(samplerate);
 
-  APF filter{10, 0.09f};
+  APF filter{10, 0.89f};
 
 
   const std::string sourcePath = SOURCE_DIR;
@@ -29,7 +30,7 @@ int main() {
     osc.setFrequency((float)i);
     double highestSample = 0.0f;
 
-    for (int j = 0; j < (100*(halfSamplerate/(1 + i))); j++) {
+    for (int j = 0; j < (500*(halfSamplerate/(1 + i))); j++) {
       double currentSample = fabs(filter.process(osc.genNextSample()));
 
       if (currentSample > highestSample) {

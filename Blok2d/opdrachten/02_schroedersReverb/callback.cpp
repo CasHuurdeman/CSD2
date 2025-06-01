@@ -5,8 +5,12 @@ CustomCallback::CustomCallback (double sampleRate)
   : AudioCallback (sampleRate), samplerate (sampleRate) {}
 
 void CustomCallback::prepare(int rate) {
-    samplerate = (double) rate;
-    reverb.prepare(samplerate);
+    samplerate = rate;
+
+    //i < 1 because of a stereo setup
+    for (int i = 0; i < 2; i++) {
+    stereoVerb[i].prepare(samplerate);
+    }
     std::cout << "\nsamplerate: " << samplerate << "\n";
 }
 
@@ -16,7 +20,8 @@ void CustomCallback::process(AudioBuffer buffer) {
   for (int channel = 0u; channel < numInputChannels; channel++) {
     for (int i = 0u; i < numFrames; i++) {
 
-       outputChannels[0][i] = reverb.processFrame(inputChannels[0][i]);
+        //FIXME
+        outputChannels[channel][i] = stereoVerb[channel].processFrame(inputChannels[0][i]);
 
     }
   }

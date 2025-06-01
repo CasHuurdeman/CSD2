@@ -3,19 +3,19 @@
 //
 
 #include <iostream>
-#include "combReverb.h"
+#include "schroedersReverb.h"
 #include "delayMath.h"
 
-CombReverb::CombReverb() {
-    std::cout << "CombReverb - constructor" << std::endl;
+SchroedersReverb::SchroedersReverb() {
+    std::cout << "SchroedersReverb - constructor" << std::endl;
 
 }
 
-CombReverb::~CombReverb() {
-    std::cout << "CombReverb - destructor" << std::endl;
+SchroedersReverb::~SchroedersReverb() {
+    std::cout << "SchroedersReverb - destructor" << std::endl;
 }
 
-void CombReverb::prepare(unsigned int samplerate) {
+void SchroedersReverb::prepare(unsigned int samplerate) {
     this->samplerate = samplerate;
 
     //TODO (later) - D and g should be computed, set but not be saved in this class
@@ -32,7 +32,7 @@ void CombReverb::prepare(unsigned int samplerate) {
 }
 
 
-double CombReverb::applyEffect(double input) {
+double SchroedersReverb::applyEffect(double input) {
     //CF --> CombFilter
 
     double output = CF1->process(input) + CF2->process(input)

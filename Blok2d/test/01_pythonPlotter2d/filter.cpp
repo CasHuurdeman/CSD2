@@ -10,10 +10,8 @@ Filter::Filter(float D, float g){
     this->D = D;
     this->g = g;
 
-    std::cout << "Filter - constructor \n D: " << this->D << std::endl;
-
-    //TODO - is +1 nodig?
-    //Using ceil() because input has to be an int and >= D
+    //TODO - is +1 needed?
+    //Using ceil() because bufferSize has to be an int and >= D
     //+1 for a case of float errors (just to be sure)
     x = new CircularBuffer{static_cast<unsigned int>(ceil(D)) + 1, D};
     y = new CircularBuffer{static_cast<unsigned int>(ceil(D)) + 1, D};

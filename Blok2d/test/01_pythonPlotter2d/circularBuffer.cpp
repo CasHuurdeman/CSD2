@@ -6,6 +6,7 @@
 #include "interpolation.h"
 
 CircularBuffer::CircularBuffer(unsigned int bufferSize, double numSamplesDelay) {
+    // std::cout << "constructor - Circular Buffer" << std::endl;
     this->bufferSize = bufferSize;
 
    //Allocating buffer
@@ -14,6 +15,7 @@ CircularBuffer::CircularBuffer(unsigned int bufferSize, double numSamplesDelay) 
         buffer[i] = 0;
     }
     this->numSamplesDelay = numSamplesDelay;
+    updateDelay();
     sampleOffset = numSamplesDelay - this->numSamplesDelay;
 }
 

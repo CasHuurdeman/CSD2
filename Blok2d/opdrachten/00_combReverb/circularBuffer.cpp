@@ -14,6 +14,7 @@ CircularBuffer::CircularBuffer(unsigned int bufferSize, double numSamplesDelay) 
         buffer[i] = 0;
     }
     this->numSamplesDelay = numSamplesDelay;
+    updateDelay();
     sampleOffset = numSamplesDelay - this->numSamplesDelay;
 }
 

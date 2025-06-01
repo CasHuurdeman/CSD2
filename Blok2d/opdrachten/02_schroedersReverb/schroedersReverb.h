@@ -11,11 +11,11 @@
 
 #pragma once
 
-class CombReverb : public Effect{
+class SchroedersReverb : public Effect{
 public:
   //TODO - later: RT60, Echo density, Modal density, then an array with N combfilters
-  CombReverb();
-  ~CombReverb();
+  SchroedersReverb();
+  ~SchroedersReverb() override;
 
   void prepare(unsigned int samplerate);
 
