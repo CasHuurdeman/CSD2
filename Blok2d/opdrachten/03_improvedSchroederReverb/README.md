@@ -1,0 +1,1 @@
+This reverb can probably be more eficcient by combining parts and using less delay lines

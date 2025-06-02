@@ -21,7 +21,6 @@ void CustomCallback::process(AudioBuffer buffer) {
     for (int i = 0u; i < numFrames; i++) {
 
         outputChannels[channel][i] = stereoVerb[channel].processFrame(inputChannels[0][i]);
-
     }
   }
 }
