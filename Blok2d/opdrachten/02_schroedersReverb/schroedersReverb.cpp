@@ -6,7 +6,7 @@
 #include "schroedersReverb.h"
 #include "delayMath.h"
 
-SchroedersReverb::SchroedersReverb() {
+SchroedersReverb::SchroedersReverb() : Effect(0.5) {
     std::cout << "SchroedersReverb - constructor" << std::endl;
 }
 
@@ -32,12 +32,14 @@ void SchroedersReverb::prepare(unsigned int samplerate) {
 double SchroedersReverb::applyEffect(double input) {
     //CF --> CombFilter
 
+    std::cout << input << std::endl;
     double output = CF1->process(input) + CF2->process(input)
     + CF3->process(input) + CF4->process(input);
 
     //for more APF you can do this with a for loop and an array
     output = APF1->process(output);
     output = APF2->process(output);
+
 
     return output;
 }

@@ -1,5 +1,4 @@
-#ifndef CALLBACK_H
-#define CALLBACK_H
+#pragma once
 
 #include <audiocomponent.h>
 #include "SchroedersReverb.h"
@@ -20,4 +19,3 @@ private:
 
 };
 
-#endif //CALLBACK_H

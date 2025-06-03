@@ -32,7 +32,7 @@ double CombReverb::applyEffect(double input) {
     //CF --> CombFilter
 
     double output = CF1->process(input) + CF2->process(input)
-    + CF3->process(input) + CF4->process(input);
+   + CF3->process(input) + CF4->process(input);
 
     return output;
 }
