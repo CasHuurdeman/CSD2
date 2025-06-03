@@ -8,7 +8,6 @@
 
 SchroedersReverb::SchroedersReverb() {
     std::cout << "SchroedersReverb - constructor" << std::endl;
-
 }
 
 SchroedersReverb::~SchroedersReverb() {
@@ -18,17 +17,15 @@ SchroedersReverb::~SchroedersReverb() {
 void SchroedersReverb::prepare(unsigned int samplerate) {
     this->samplerate = samplerate;
 
-    //TODO (later) - D and g should be computed, set but not be saved in this class
-    // now using static D values from Pirkle (p466)
 
-    CF1 = new CombFilter {DelayMath::msToSamples(16.0f, samplerate), 0.86f};
-    CF2 = new CombFilter {DelayMath::msToSamples(6.5f, samplerate), 0.86f};
-    CF3 = new CombFilter {DelayMath::msToSamples(3.0f, samplerate), 0.86f};
-    CF4 = new CombFilter {DelayMath::msToSamples(1.7f, samplerate), 0.86f};
+    // Using static D values inspired on Schroeder (Pirkle 471)
+    CF1 = new CombFilter {DelayMath::msToSamples(30.0f, samplerate), calculate_g(30.0f)};
+    CF2 = new CombFilter {DelayMath::msToSamples(35.5f, samplerate), calculate_g(35.5f)};
+    CF3 = new CombFilter {DelayMath::msToSamples(41.3f, samplerate), calculate_g(41.3f)};
+    CF4 = new CombFilter {DelayMath::msToSamples(45.0f, samplerate), calculate_g(45.0f)};
 
-    //TODO - need new values
-    APF1 = new APF{1, 0.5f};
-    APF2 = new APF{2, 0.5f};
+    APF1 = new APF{DelayMath::msToSamples(2.0f, samplerate), 0.5f};
+    APF2 = new APF{DelayMath::msToSamples(3.0f, samplerate), 0.5f};
 }
 
 
@@ -43,6 +40,15 @@ double SchroedersReverb::applyEffect(double input) {
     output = APF2->process(output);
 
     return output;
+}
+
+float SchroedersReverb::calculate_g(float D) {
+    //RT60 is now fixed
+    double RT60 = 1000; //ms
+
+    float g = pow(10, (-3*D)/ RT60);
+
+    return g;
 }
 
 

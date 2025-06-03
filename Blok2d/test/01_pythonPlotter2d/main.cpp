@@ -19,7 +19,7 @@ int main() {
   Sine osc{0};
   osc.prepare(samplerate);
 
-  APF filter{10, 0.89f};
+  LPF filter{0.89f};
 
 
   const std::string sourcePath = SOURCE_DIR;

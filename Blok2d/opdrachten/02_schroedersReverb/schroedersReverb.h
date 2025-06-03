@@ -21,9 +21,7 @@ public:
 
   double applyEffect(double input) override;
 
-    //TODO (later) - make calculateD and calculate_g
-  float calculateD();
-  float calculate_g();
+  float calculate_g(float D);
 
 
 private:

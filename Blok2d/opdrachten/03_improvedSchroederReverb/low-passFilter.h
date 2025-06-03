@@ -7,12 +7,16 @@
 
 #include "filter.h"
 
-class LPF : public Filter{
+class LPF{
 public:
     // APF() = default;
-    LPF(float D, float g);
-    ~LPF() override;
+    LPF(float g);
+    ~LPF();
 
-    double process(double input) override;
+    double process(double input);
+
+private:
+    double y1 = 0.0;
+    float g = 0.0f;
 };
 

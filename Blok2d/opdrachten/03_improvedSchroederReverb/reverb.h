@@ -8,6 +8,7 @@
 #include <array>
 #include "delayMath.h"
 #include "sine.h"
+#include "circularBuffer.h"
 
 #pragma once
 
@@ -37,6 +38,8 @@ private:
 
   APF* APF1;
   APF* APF2;
+
+  CircularBuffer* CircBuffer;
 
   unsigned int samplerate;
 };

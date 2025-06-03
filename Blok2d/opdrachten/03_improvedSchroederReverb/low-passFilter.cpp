@@ -5,9 +5,10 @@
 #include "low-passFilter.h"
 #include <iostream>
 
-//TODO - is dit hoe ik mijn filter base class initialiseer?
-LPF::LPF(float D, float g): Filter(D, g){
+
+LPF::LPF(float g){
     std::cout << "LPF - constructor" << std::endl;
+    this->g = g;
 }
 
 LPF::~LPF() {
@@ -15,13 +16,9 @@ LPF::~LPF() {
 }
 
 double LPF::process(double input) {
-    x->write(input);
 
-    //TODO - maybe just without buffer
-//FIXME - this is a combfilter too!
-    double output = input + g*y->read();
-
-    y->write(output);
+    double output = input + g*y1;
+    y1 = output;
 
     return output;
 }
